@@ -36,7 +36,7 @@ An AI-powered customer support assistant built using **Retrieval-Augmented Gener
 
 3. **Run the Server:**
    ```bash
-   python main.py
+   python rag_system/main.py
    ```
    *Note: On the first run, the system will download the embedding model (~80MB) and build the indices. This may take 15-30 seconds. Subsequent starts will be nearly instant.*
 
