@@ -1,0 +1,2088 @@
+2026-07-16 12:36:12,425 [INFO] main: ============================================================
+2026-07-16 12:36:12,426 [INFO] main: Initializing RAG Pipeline...
+2026-07-16 12:36:12,427 [INFO] main: ============================================================
+2026-07-16 12:36:12,428 [INFO] main: Step 1/3: Processing documents...
+2026-07-16 12:36:12,428 [INFO] document_processor: Starting document processing...
+2026-07-16 12:36:12,429 [INFO] document_processor: Loaded 7 product documents
+2026-07-16 12:36:12,432 [INFO] document_processor: Loaded 8 support tickets
+2026-07-16 12:36:12,443 [INFO] document_processor: Total chunks created: 82
+2026-07-16 12:36:12,459 [INFO] main: Step 2/3: Building indices (this may take a moment on first run)...
+2026-07-16 12:36:12,460 [INFO] indexer: Initializing indexer...
+2026-07-16 12:36:12,460 [INFO] indexer: Loading embedding model: all-MiniLM-L6-v2
+2026-07-16 12:36:12,466 [INFO] sentence_transformers.SentenceTransformer: Use pytorch device_name: cpu
+2026-07-16 12:36:12,467 [INFO] sentence_transformers.SentenceTransformer: Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2026-07-16 12:36:16,618 [INFO] indexer: Embedding model loaded successfully
+2026-07-16 12:36:16,619 [INFO] indexer: Building ChromaDB vector index...
+2026-07-16 12:36:16,698 [INFO] chromadb.telemetry.product.posthog: Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2026-07-16 12:36:16,995 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event ClientStartEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 12:36:17,079 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event ClientCreateCollectionEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 12:36:17,080 [INFO] indexer: Generating embeddings for 82 chunks...
+2026-07-16 12:36:18,963 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event CollectionAddEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 12:36:18,963 [INFO] indexer: ChromaDB index built with 82 vectors
+2026-07-16 12:36:18,963 [INFO] indexer: Building TF-IDF keyword index...
+2026-07-16 12:36:18,973 [INFO] indexer: TF-IDF index built: (82, 2818)
+2026-07-16 12:36:18,981 [INFO] indexer: TF-IDF index persisted to disk
+2026-07-16 12:36:18,982 [INFO] indexer: Indexer initialization complete
+2026-07-16 12:36:18,982 [INFO] main: Step 3/3: Initializing retriever and response generator...
+2026-07-16 12:36:18,982 [INFO] response_generator: Gemini model initialized: gemini-2.0-flash
+2026-07-16 12:36:18,982 [INFO] main: Pipeline initialized in 6.6s
+2026-07-16 12:36:18,982 [INFO] main:   - Chunks indexed: 82
+2026-07-16 12:36:18,983 [INFO] main:   - Gemini LLM: available
+2026-07-16 12:36:18,983 [INFO] main: ============================================================
+2026-07-16 12:36:47,944 [INFO] retriever: Query classified: {'query_type': 'feature_usage', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'docs'}
+2026-07-16 12:36:47,966 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event CollectionQueryEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 12:36:47,975 [INFO] retriever: Retrieved 5 results for query (type=feature_usage, multi_doc=False)
+2026-07-16 12:36:47,975 [INFO] multi_doc_reasoner: Multi-doc analysis: 5 sources, 4 contradictions, 1 version notes
+2026-07-16 12:36:48,457 [ERROR] response_generator: Gemini generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+Please retry in 9.454992033s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 9
+}
+]. Using fallback.
+2026-07-16 12:36:48,460 [INFO] main: Query processed in 516ms: 'How do I create a CloudSync account...' -> HIGH confidence, 5 sources
+2026-07-16 12:46:47,610 [INFO] main: Shutting down RAG system
+2026-07-16 12:47:05,016 [INFO] main: ============================================================
+2026-07-16 12:47:05,017 [INFO] main: Initializing RAG Pipeline...
+2026-07-16 12:47:05,017 [INFO] main: ============================================================
+2026-07-16 12:47:05,018 [INFO] main: Step 1/3: Processing documents...
+2026-07-16 12:47:05,018 [INFO] document_processor: Starting document processing...
+2026-07-16 12:47:05,019 [INFO] document_processor: Loaded 7 product documents
+2026-07-16 12:47:05,019 [INFO] document_processor: Loaded 8 support tickets
+2026-07-16 12:47:05,025 [INFO] document_processor: Total chunks created: 82
+2026-07-16 12:47:05,026 [INFO] main: Step 2/3: Building indices (this may take a moment on first run)...
+2026-07-16 12:47:05,026 [INFO] indexer: Initializing indexer...
+2026-07-16 12:47:05,027 [INFO] indexer: Loading embedding model: all-MiniLM-L6-v2
+2026-07-16 12:47:05,029 [INFO] sentence_transformers.SentenceTransformer: Use pytorch device_name: cpu
+2026-07-16 12:47:05,029 [INFO] sentence_transformers.SentenceTransformer: Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2026-07-16 12:47:09,411 [INFO] indexer: Embedding model loaded successfully
+2026-07-16 12:47:09,412 [INFO] indexer: Building ChromaDB vector index...
+2026-07-16 12:47:09,460 [INFO] chromadb.telemetry.product.posthog: Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2026-07-16 12:47:09,667 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event ClientStartEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 12:47:09,746 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event ClientCreateCollectionEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 12:47:09,746 [INFO] indexer: Generating embeddings for 82 chunks...
+2026-07-16 12:47:11,076 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event CollectionAddEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 12:47:11,077 [INFO] indexer: ChromaDB index built with 82 vectors
+2026-07-16 12:47:11,077 [INFO] indexer: Building TF-IDF keyword index...
+2026-07-16 12:47:11,085 [INFO] indexer: TF-IDF index built: (82, 2818)
+2026-07-16 12:47:11,094 [INFO] indexer: TF-IDF index persisted to disk
+2026-07-16 12:47:11,096 [INFO] indexer: Indexer initialization complete
+2026-07-16 12:47:11,096 [INFO] main: Step 3/3: Initializing retriever and response generator...
+2026-07-16 12:47:11,096 [INFO] response_generator: Gemini model initialized: gemini-2.0-flash
+2026-07-16 12:47:11,097 [INFO] main: Pipeline initialized in 6.1s
+2026-07-16 12:47:11,097 [INFO] main:   - Chunks indexed: 82
+2026-07-16 12:47:11,097 [INFO] main:   - Gemini LLM: available
+2026-07-16 12:47:11,097 [INFO] main: ============================================================
+2026-07-16 12:47:59,165 [INFO] retriever: Query classified: {'query_type': 'troubleshooting', 'has_negation': True, 'is_multi_doc': True, 'source_preference': 'both'}
+2026-07-16 12:47:59,183 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event CollectionQueryEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 12:47:59,193 [INFO] retriever: Retrieved 5 results for query (type=troubleshooting, multi_doc=True)
+2026-07-16 12:47:59,194 [INFO] multi_doc_reasoner: Multi-doc analysis: 4 sources, 3 contradictions, 1 version notes
+2026-07-16 12:48:00,306 [ERROR] response_generator: Gemini generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+Please retry in 57.66679628s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 57
+}
+]. Using fallback.
+2026-07-16 12:48:00,310 [INFO] main: Query processed in 1146ms: 'y files aren't syncing between devices, what shoul...' -> HIGH confidence, 4 sources
+2026-07-16 12:52:18,845 [INFO] main: Shutting down RAG system
+2026-07-16 13:27:08,493 [INFO] main: ============================================================
+2026-07-16 13:27:08,494 [INFO] main: Initializing RAG Pipeline...
+2026-07-16 13:27:08,494 [INFO] main: ============================================================
+2026-07-16 13:27:08,495 [INFO] main: Step 1/3: Processing documents...
+2026-07-16 13:27:08,495 [INFO] document_processor: Starting document processing...
+2026-07-16 13:27:08,496 [INFO] document_processor: Loaded 7 product documents
+2026-07-16 13:27:08,497 [INFO] document_processor: Loaded 8 support tickets
+2026-07-16 13:27:08,504 [INFO] document_processor: Total chunks created: 82
+2026-07-16 13:27:08,504 [INFO] main: Step 2/3: Building indices (this may take a moment on first run)...
+2026-07-16 13:27:08,504 [INFO] indexer: Initializing indexer...
+2026-07-16 13:27:08,505 [INFO] indexer: Loading embedding model: all-MiniLM-L6-v2
+2026-07-16 13:27:08,507 [INFO] sentence_transformers.SentenceTransformer: Use pytorch device_name: cpu
+2026-07-16 13:27:08,508 [INFO] sentence_transformers.SentenceTransformer: Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2026-07-16 13:27:18,936 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: a02e4c1f-63dd-4509-a8a2-939114f4e92a)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json
+2026-07-16 13:27:18,937 [WARNING] huggingface_hub.utils._http: Retrying in 1s [Retry 1/5].
+2026-07-16 13:27:30,313 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: aa3f5fdf-7c63-49ae-9692-d6df0fae06ad)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json
+2026-07-16 13:27:30,314 [WARNING] huggingface_hub.utils._http: Retrying in 2s [Retry 2/5].
+2026-07-16 13:27:42,655 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: 8eeee419-9eb8-427b-8471-bbb891d038df)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json
+2026-07-16 13:27:42,656 [WARNING] huggingface_hub.utils._http: Retrying in 4s [Retry 3/5].
+2026-07-16 13:27:56,985 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: 09ad5e9d-876a-47ff-adf8-ca4093becee0)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json
+2026-07-16 13:27:56,986 [WARNING] huggingface_hub.utils._http: Retrying in 8s [Retry 4/5].
+2026-07-16 13:28:15,305 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: 32cd7c85-2e82-4d2b-98a8-bec6bb062c1f)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json
+2026-07-16 13:28:15,306 [WARNING] huggingface_hub.utils._http: Retrying in 8s [Retry 5/5].
+2026-07-16 13:28:33,665 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: 17319d76-19a9-49ce-b8d3-da77b3ec77bd)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json
+2026-07-16 13:28:44,084 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: 3dbc4c18-6a56-4722-830a-189792b2d0aa)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json
+2026-07-16 13:28:44,085 [WARNING] huggingface_hub.utils._http: Retrying in 1s [Retry 1/5].
+2026-07-16 13:28:55,433 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: ebc8adf1-de9e-449f-ac51-69df9916a707)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json
+2026-07-16 13:28:55,435 [WARNING] huggingface_hub.utils._http: Retrying in 2s [Retry 2/5].
+2026-07-16 13:29:07,745 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: 43f8d943-62e6-4181-aee4-458ad527f9e8)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json
+2026-07-16 13:29:07,747 [WARNING] huggingface_hub.utils._http: Retrying in 4s [Retry 3/5].
+2026-07-16 13:29:22,006 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: 63a9a685-e7b4-40c3-b2f6-f48678f25f83)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json
+2026-07-16 13:29:22,007 [WARNING] huggingface_hub.utils._http: Retrying in 8s [Retry 4/5].
+2026-07-16 13:29:40,324 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: ab37e250-38f1-4f22-8dca-fece19ad6d88)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json
+2026-07-16 13:29:40,325 [WARNING] huggingface_hub.utils._http: Retrying in 8s [Retry 5/5].
+2026-07-16 13:29:58,692 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: 0293fa10-9dd9-48b5-9326-468aa48e1e6a)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json
+2026-07-16 13:30:11,544 [INFO] main: ============================================================
+2026-07-16 13:30:11,545 [INFO] main: Initializing RAG Pipeline...
+2026-07-16 13:30:11,545 [INFO] main: ============================================================
+2026-07-16 13:30:11,545 [INFO] main: Step 1/3: Processing documents...
+2026-07-16 13:30:11,546 [INFO] document_processor: Starting document processing...
+2026-07-16 13:30:11,547 [INFO] document_processor: Loaded 7 product documents
+2026-07-16 13:30:11,547 [INFO] document_processor: Loaded 8 support tickets
+2026-07-16 13:30:11,555 [INFO] document_processor: Total chunks created: 82
+2026-07-16 13:30:11,556 [INFO] main: Step 2/3: Building indices (this may take a moment on first run)...
+2026-07-16 13:30:11,556 [INFO] indexer: Initializing indexer...
+2026-07-16 13:30:11,556 [INFO] indexer: Loading embedding model: all-MiniLM-L6-v2
+2026-07-16 13:30:11,559 [INFO] sentence_transformers.SentenceTransformer: Use pytorch device_name: cpu
+2026-07-16 13:30:11,559 [INFO] sentence_transformers.SentenceTransformer: Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2026-07-16 13:30:21,941 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: 5511eca0-8d98-494b-bdd9-c2be18e97868)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json
+2026-07-16 13:30:21,942 [WARNING] huggingface_hub.utils._http: Retrying in 1s [Retry 1/5].
+2026-07-16 13:30:33,263 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: 05a1e20f-026b-43c4-a424-148f300267a7)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json
+2026-07-16 13:30:33,265 [WARNING] huggingface_hub.utils._http: Retrying in 2s [Retry 2/5].
+2026-07-16 13:30:45,622 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: 2055a510-87bb-4d10-9d0e-256d3f8c1367)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json
+2026-07-16 13:30:45,623 [WARNING] huggingface_hub.utils._http: Retrying in 4s [Retry 3/5].
+2026-07-16 13:31:00,005 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: 5bbd3205-7ea6-49d9-bb7a-826db4dd9d1f)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json
+2026-07-16 13:31:00,006 [WARNING] huggingface_hub.utils._http: Retrying in 8s [Retry 4/5].
+2026-07-16 13:31:18,356 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: 61684876-71e5-43d8-9ee3-7b03f6ed493e)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json
+2026-07-16 13:31:18,358 [WARNING] huggingface_hub.utils._http: Retrying in 8s [Retry 5/5].
+2026-07-16 13:31:36,668 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: d802ca7f-dd43-4a3a-b4b5-b84ddff76342)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json
+2026-07-16 13:31:47,088 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: 582fb3de-1e9f-4509-b576-ca7b7072dc10)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json
+2026-07-16 13:31:47,089 [WARNING] huggingface_hub.utils._http: Retrying in 1s [Retry 1/5].
+2026-07-16 13:31:58,442 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: 8766895f-59af-4b19-b390-7064b9dbfe2a)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json
+2026-07-16 13:31:58,444 [WARNING] huggingface_hub.utils._http: Retrying in 2s [Retry 2/5].
+2026-07-16 13:32:18,938 [INFO] main: ============================================================
+2026-07-16 13:32:18,938 [INFO] main: Initializing RAG Pipeline...
+2026-07-16 13:32:18,939 [INFO] main: ============================================================
+2026-07-16 13:32:18,939 [INFO] main: Step 1/3: Processing documents...
+2026-07-16 13:32:18,939 [INFO] document_processor: Starting document processing...
+2026-07-16 13:32:18,940 [INFO] document_processor: Loaded 7 product documents
+2026-07-16 13:32:18,941 [INFO] document_processor: Loaded 8 support tickets
+2026-07-16 13:32:18,948 [INFO] document_processor: Total chunks created: 82
+2026-07-16 13:32:18,948 [INFO] main: Step 2/3: Building indices (this may take a moment on first run)...
+2026-07-16 13:32:18,948 [INFO] indexer: Initializing indexer...
+2026-07-16 13:32:18,949 [INFO] indexer: Loading embedding model: all-MiniLM-L6-v2
+2026-07-16 13:32:18,950 [INFO] sentence_transformers.SentenceTransformer: Use pytorch device_name: cpu
+2026-07-16 13:32:18,951 [INFO] sentence_transformers.SentenceTransformer: Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2026-07-16 13:32:29,302 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: 50a48e2e-5298-4a35-8b56-a3942197c30a)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json
+2026-07-16 13:32:29,303 [WARNING] huggingface_hub.utils._http: Retrying in 1s [Retry 1/5].
+2026-07-16 13:32:40,633 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: 608f63c8-a477-4f74-b89c-2fb9b7f7f318)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json
+2026-07-16 13:32:40,634 [WARNING] huggingface_hub.utils._http: Retrying in 2s [Retry 2/5].
+2026-07-16 13:32:53,104 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: 0ea8df95-16fc-440e-9aea-b1a92ee0290e)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json
+2026-07-16 13:32:53,105 [WARNING] huggingface_hub.utils._http: Retrying in 4s [Retry 3/5].
+2026-07-16 13:33:07,499 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: 9e23a545-5279-41e9-9815-d2ec1fc3a770)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json
+2026-07-16 13:33:07,500 [WARNING] huggingface_hub.utils._http: Retrying in 8s [Retry 4/5].
+2026-07-16 13:33:25,926 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: 594ad43d-1f29-4441-9e7a-2170f3e00fb1)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json
+2026-07-16 13:33:25,927 [WARNING] huggingface_hub.utils._http: Retrying in 8s [Retry 5/5].
+2026-07-16 13:33:44,305 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: 329be4ff-6757-4ef1-a367-781d4e2da73b)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json
+2026-07-16 13:33:50,574 [INFO] main: ============================================================
+2026-07-16 13:33:50,575 [INFO] main: Initializing RAG Pipeline...
+2026-07-16 13:33:50,575 [INFO] main: ============================================================
+2026-07-16 13:33:50,575 [INFO] main: Step 1/3: Processing documents...
+2026-07-16 13:33:50,576 [INFO] document_processor: Starting document processing...
+2026-07-16 13:33:50,576 [INFO] document_processor: Loaded 7 product documents
+2026-07-16 13:33:50,577 [INFO] document_processor: Loaded 8 support tickets
+2026-07-16 13:33:50,584 [INFO] document_processor: Total chunks created: 82
+2026-07-16 13:33:50,584 [INFO] main: Step 2/3: Building indices (this may take a moment on first run)...
+2026-07-16 13:33:50,584 [INFO] indexer: Initializing indexer...
+2026-07-16 13:33:50,585 [INFO] indexer: Loading embedding model: all-MiniLM-L6-v2
+2026-07-16 13:33:50,587 [INFO] sentence_transformers.SentenceTransformer: Use pytorch device_name: cpu
+2026-07-16 13:33:50,587 [INFO] sentence_transformers.SentenceTransformer: Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2026-07-16 13:33:50,763 [INFO] indexer: Embedding model loaded successfully
+2026-07-16 13:33:50,764 [INFO] indexer: Building ChromaDB vector index...
+2026-07-16 13:33:50,845 [INFO] chromadb.telemetry.product.posthog: Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2026-07-16 13:33:51,187 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event ClientStartEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 13:33:51,279 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event ClientCreateCollectionEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 13:33:51,279 [INFO] indexer: Generating embeddings for 82 chunks...
+2026-07-16 13:33:53,452 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event CollectionAddEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 13:33:53,453 [INFO] indexer: ChromaDB index built with 82 vectors
+2026-07-16 13:33:53,453 [INFO] indexer: Building TF-IDF keyword index...
+2026-07-16 13:33:53,464 [INFO] indexer: TF-IDF index built: (82, 2818)
+2026-07-16 13:33:53,472 [INFO] indexer: TF-IDF index persisted to disk
+2026-07-16 13:33:53,473 [INFO] indexer: Indexer initialization complete
+2026-07-16 13:33:53,474 [INFO] main: Step 3/3: Initializing retriever and response generator...
+2026-07-16 13:33:53,474 [INFO] response_generator: Gemini model initialized: gemini-2.5-flash
+2026-07-16 13:33:53,475 [INFO] main: Pipeline initialized in 2.9s
+2026-07-16 13:33:53,476 [INFO] main:   - Chunks indexed: 82
+2026-07-16 13:33:53,476 [INFO] main:   - Gemini LLM: available
+2026-07-16 13:33:53,477 [INFO] main: ============================================================
+2026-07-16 13:33:54,751 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: 0f4219b7-a60b-4348-acff-21cae6e65b9c)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json
+2026-07-16 13:33:54,753 [WARNING] huggingface_hub.utils._http: Retrying in 1s [Retry 1/5].
+2026-07-16 13:34:06,143 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: 4d5c7468-eff1-46f7-8301-6a6a6da2171c)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json
+2026-07-16 13:34:06,144 [WARNING] huggingface_hub.utils._http: Retrying in 2s [Retry 2/5].
+2026-07-16 13:34:18,475 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: c1f19d6a-4dfd-43c0-a69a-05384d69e299)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json
+2026-07-16 13:34:18,476 [WARNING] huggingface_hub.utils._http: Retrying in 4s [Retry 3/5].
+2026-07-16 13:34:30,376 [INFO] retriever: Query classified: {'query_type': 'feature_usage', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'docs'}
+2026-07-16 13:34:30,461 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event CollectionQueryEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 13:34:30,474 [INFO] retriever: Retrieved 5 results for query (type=feature_usage, multi_doc=False)
+2026-07-16 13:34:30,478 [INFO] multi_doc_reasoner: Multi-doc analysis: 5 sources, 4 contradictions, 1 version notes
+2026-07-16 13:34:31,767 [ERROR] response_generator: Gemini generation failed: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use a newer model for the latest features and improvements.. Using fallback.
+2026-07-16 13:34:32,826 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: dddde434-2302-43db-aacc-1b29dc11a7ad)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json
+2026-07-16 13:34:32,828 [WARNING] huggingface_hub.utils._http: Retrying in 8s [Retry 4/5].
+2026-07-16 13:34:35,752 [INFO] retriever: Query classified: {'query_type': 'troubleshooting', 'has_negation': True, 'is_multi_doc': True, 'source_preference': 'both'}
+2026-07-16 13:34:35,900 [INFO] retriever: Retrieved 5 results for query (type=troubleshooting, multi_doc=True)
+2026-07-16 13:34:35,914 [INFO] multi_doc_reasoner: Multi-doc analysis: 4 sources, 3 contradictions, 1 version notes
+2026-07-16 13:34:36,477 [ERROR] response_generator: Gemini generation failed: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use a newer model for the latest features and improvements.. Using fallback.
+2026-07-16 13:34:40,483 [INFO] retriever: Query classified: {'query_type': 'billing_issue', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'both'}
+2026-07-16 13:34:40,590 [INFO] retriever: Retrieved 5 results for query (type=billing_issue, multi_doc=False)
+2026-07-16 13:34:40,593 [INFO] multi_doc_reasoner: Multi-doc analysis: 2 sources, 0 contradictions, 0 version notes
+2026-07-16 13:34:40,881 [ERROR] response_generator: Gemini generation failed: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use a newer model for the latest features and improvements.. Using fallback.
+2026-07-16 13:34:44,886 [INFO] retriever: Query classified: {'query_type': 'feature_usage', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'docs'}
+2026-07-16 13:34:44,910 [INFO] retriever: Retrieved 5 results for query (type=feature_usage, multi_doc=False)
+2026-07-16 13:34:44,911 [INFO] multi_doc_reasoner: Multi-doc analysis: 4 sources, 4 contradictions, 2 version notes
+2026-07-16 13:34:45,241 [ERROR] response_generator: Gemini generation failed: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use a newer model for the latest features and improvements.. Using fallback.
+2026-07-16 13:34:49,265 [INFO] retriever: Query classified: {'query_type': 'troubleshooting', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'both'}
+2026-07-16 13:34:49,289 [INFO] retriever: Retrieved 5 results for query (type=troubleshooting, multi_doc=False)
+2026-07-16 13:34:49,290 [INFO] multi_doc_reasoner: Multi-doc analysis: 2 sources, 1 contradictions, 1 version notes
+2026-07-16 13:34:49,686 [ERROR] response_generator: Gemini generation failed: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use a newer model for the latest features and improvements.. Using fallback.
+2026-07-16 13:34:51,853 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: 80a9b569-a1bf-4a15-9541-b179d24e5f5d)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json
+2026-07-16 13:34:51,854 [WARNING] huggingface_hub.utils._http: Retrying in 8s [Retry 5/5].
+2026-07-16 13:34:53,681 [INFO] retriever: Query classified: {'query_type': 'comparison', 'has_negation': False, 'is_multi_doc': True, 'source_preference': 'docs'}
+2026-07-16 13:34:53,698 [INFO] retriever: Retrieved 5 results for query (type=comparison, multi_doc=True)
+2026-07-16 13:34:53,698 [INFO] multi_doc_reasoner: Multi-doc analysis: 3 sources, 0 contradictions, 0 version notes
+2026-07-16 13:34:54,090 [ERROR] response_generator: Gemini generation failed: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use a newer model for the latest features and improvements.. Using fallback.
+2026-07-16 13:34:58,086 [INFO] retriever: Query classified: {'query_type': 'feature_usage', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'docs'}
+2026-07-16 13:34:58,138 [INFO] retriever: Retrieved 5 results for query (type=feature_usage, multi_doc=False)
+2026-07-16 13:34:58,139 [INFO] multi_doc_reasoner: Multi-doc analysis: 4 sources, 3 contradictions, 1 version notes
+2026-07-16 13:34:58,393 [ERROR] response_generator: Gemini generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash
+Please retry in 59.552103581s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 5
+}
+, retry_delay {
+  seconds: 59
+}
+]. Using fallback.
+2026-07-16 13:35:02,382 [INFO] retriever: Query classified: {'query_type': 'troubleshooting', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'both'}
+2026-07-16 13:35:02,409 [INFO] retriever: Retrieved 5 results for query (type=troubleshooting, multi_doc=False)
+2026-07-16 13:35:02,410 [INFO] multi_doc_reasoner: Multi-doc analysis: 1 sources, 0 contradictions, 0 version notes
+2026-07-16 13:35:02,694 [ERROR] response_generator: Gemini generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash
+Please retry in 55.281896545s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 5
+}
+, retry_delay {
+  seconds: 55
+}
+]. Using fallback.
+2026-07-16 13:35:06,709 [INFO] retriever: Query classified: {'query_type': 'developer', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'docs'}
+2026-07-16 13:35:06,731 [INFO] retriever: Retrieved 5 results for query (type=developer, multi_doc=False)
+2026-07-16 13:35:06,732 [INFO] multi_doc_reasoner: Multi-doc analysis: 2 sources, 1 contradictions, 1 version notes
+2026-07-16 13:35:06,993 [ERROR] response_generator: Gemini generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash
+Please retry in 50.945499774s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 5
+}
+, retry_delay {
+  seconds: 50
+}
+]. Using fallback.
+2026-07-16 13:35:10,243 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: 5d50ddb9-6200-4a46-9736-b7b7312e8210)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json
+2026-07-16 13:35:11,021 [INFO] retriever: Query classified: {'query_type': 'troubleshooting', 'has_negation': True, 'is_multi_doc': False, 'source_preference': 'both'}
+2026-07-16 13:35:11,047 [INFO] retriever: Retrieved 5 results for query (type=troubleshooting, multi_doc=False)
+2026-07-16 13:35:11,047 [INFO] multi_doc_reasoner: Multi-doc analysis: 2 sources, 0 contradictions, 0 version notes
+2026-07-16 13:35:11,293 [ERROR] response_generator: Gemini generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash
+Please retry in 46.628763422s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 5
+}
+, retry_delay {
+  seconds: 46
+}
+]. Using fallback.
+2026-07-16 13:35:15,297 [INFO] retriever: Query classified: {'query_type': 'security', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'docs'}
+2026-07-16 13:35:15,351 [INFO] retriever: Retrieved 5 results for query (type=security, multi_doc=False)
+2026-07-16 13:35:15,352 [INFO] multi_doc_reasoner: Multi-doc analysis: 3 sources, 0 contradictions, 0 version notes
+2026-07-16 13:35:15,594 [ERROR] response_generator: Gemini generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash
+Please retry in 42.336300995s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 5
+}
+, retry_delay {
+  seconds: 42
+}
+]. Using fallback.
+2026-07-16 13:35:19,592 [INFO] retriever: Query classified: {'query_type': 'billing_issue', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'both'}
+2026-07-16 13:35:19,614 [INFO] retriever: Retrieved 5 results for query (type=billing_issue, multi_doc=False)
+2026-07-16 13:35:19,615 [INFO] multi_doc_reasoner: Multi-doc analysis: 2 sources, 0 contradictions, 0 version notes
+2026-07-16 13:35:19,895 [ERROR] response_generator: Gemini generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash
+Please retry in 38.058579181s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 5
+}
+, retry_delay {
+  seconds: 38
+}
+]. Using fallback.
+2026-07-16 13:35:20,573 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: 7f71beeb-83c2-4610-b5b1-ebc33a5b67f4)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md
+2026-07-16 13:35:20,574 [WARNING] huggingface_hub.utils._http: Retrying in 1s [Retry 1/5].
+2026-07-16 13:35:23,889 [INFO] main: Evaluation results saved to C:\Users\SMART TECH\Desktop\Evaluation Task\response.json
+2026-07-16 13:35:31,934 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: 454e548a-2c67-4ea5-855c-baf3943f1491)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md
+2026-07-16 13:35:31,936 [WARNING] huggingface_hub.utils._http: Retrying in 2s [Retry 2/5].
+2026-07-16 13:35:44,244 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: de275edc-1010-46e0-8c05-a2bbf44781e4)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md
+2026-07-16 13:35:44,245 [WARNING] huggingface_hub.utils._http: Retrying in 4s [Retry 3/5].
+2026-07-16 13:35:58,832 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: 4f9dfe74-4ba5-4b77-b534-b3d30b9c44b8)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md
+2026-07-16 13:35:58,833 [WARNING] huggingface_hub.utils._http: Retrying in 8s [Retry 4/5].
+2026-07-16 13:36:17,233 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: dba5f72d-52d0-4116-9083-c24418e674ea)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md
+2026-07-16 13:36:17,235 [WARNING] huggingface_hub.utils._http: Retrying in 8s [Retry 5/5].
+2026-07-16 13:36:35,678 [WARNING] huggingface_hub.utils._http: '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: 9443eb87-a574-4242-829d-2dd7457bb204)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md
+2026-07-16 13:36:45,711 [INFO] indexer: Embedding model loaded successfully
+2026-07-16 13:36:45,712 [INFO] indexer: Building ChromaDB vector index...
+2026-07-16 13:36:45,761 [INFO] chromadb.telemetry.product.posthog: Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2026-07-16 13:36:45,979 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event ClientStartEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 13:36:46,062 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event ClientCreateCollectionEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 13:36:46,062 [INFO] indexer: Generating embeddings for 82 chunks...
+2026-07-16 13:36:48,001 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event CollectionAddEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 13:36:48,002 [INFO] indexer: ChromaDB index built with 82 vectors
+2026-07-16 13:36:48,002 [INFO] indexer: Building TF-IDF keyword index...
+2026-07-16 13:36:48,018 [INFO] indexer: TF-IDF index built: (82, 2818)
+2026-07-16 13:36:48,029 [INFO] indexer: TF-IDF index persisted to disk
+2026-07-16 13:36:48,030 [INFO] indexer: Indexer initialization complete
+2026-07-16 13:36:48,030 [INFO] main: Step 3/3: Initializing retriever and response generator...
+2026-07-16 13:36:48,031 [INFO] response_generator: Gemini model initialized: gemini-2.5-flash
+2026-07-16 13:36:48,031 [INFO] main: Pipeline initialized in 269.1s
+2026-07-16 13:36:48,032 [INFO] main:   - Chunks indexed: 82
+2026-07-16 13:36:48,033 [INFO] main:   - Gemini LLM: available
+2026-07-16 13:36:48,033 [INFO] main: ============================================================
+2026-07-16 13:36:48,037 [INFO] main: Shutting down RAG system
+2026-07-16 13:36:49,369 [INFO] main: Shutting down RAG system
+2026-07-16 13:37:08,206 [INFO] main: ============================================================
+2026-07-16 13:37:08,207 [INFO] main: Initializing RAG Pipeline...
+2026-07-16 13:37:08,207 [INFO] main: ============================================================
+2026-07-16 13:37:08,208 [INFO] main: Step 1/3: Processing documents...
+2026-07-16 13:37:08,208 [INFO] document_processor: Starting document processing...
+2026-07-16 13:37:08,210 [INFO] document_processor: Loaded 7 product documents
+2026-07-16 13:37:08,211 [INFO] document_processor: Loaded 8 support tickets
+2026-07-16 13:37:08,223 [INFO] document_processor: Total chunks created: 82
+2026-07-16 13:37:08,223 [INFO] main: Step 2/3: Building indices (this may take a moment on first run)...
+2026-07-16 13:37:08,224 [INFO] indexer: Initializing indexer...
+2026-07-16 13:37:08,225 [INFO] indexer: Loading embedding model: all-MiniLM-L6-v2
+2026-07-16 13:37:08,227 [INFO] sentence_transformers.SentenceTransformer: Use pytorch device_name: cpu
+2026-07-16 13:37:08,228 [INFO] sentence_transformers.SentenceTransformer: Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2026-07-16 13:37:08,493 [INFO] indexer: Embedding model loaded successfully
+2026-07-16 13:37:08,494 [INFO] indexer: Building ChromaDB vector index...
+2026-07-16 13:37:08,583 [INFO] chromadb.telemetry.product.posthog: Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2026-07-16 13:37:08,898 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event ClientStartEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 13:37:08,985 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event ClientCreateCollectionEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 13:37:08,986 [INFO] indexer: Generating embeddings for 82 chunks...
+2026-07-16 13:37:10,652 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event CollectionAddEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 13:37:10,652 [INFO] indexer: ChromaDB index built with 82 vectors
+2026-07-16 13:37:10,654 [INFO] indexer: Building TF-IDF keyword index...
+2026-07-16 13:37:10,676 [INFO] indexer: TF-IDF index built: (82, 2818)
+2026-07-16 13:37:10,685 [INFO] indexer: TF-IDF index persisted to disk
+2026-07-16 13:37:10,685 [INFO] indexer: Indexer initialization complete
+2026-07-16 13:37:10,686 [INFO] main: Step 3/3: Initializing retriever and response generator...
+2026-07-16 13:37:10,687 [INFO] response_generator: Gemini model initialized: gemini-2.5-flash
+2026-07-16 13:37:10,687 [INFO] main: Pipeline initialized in 2.5s
+2026-07-16 13:37:10,688 [INFO] main:   - Chunks indexed: 82
+2026-07-16 13:37:10,689 [INFO] main:   - Gemini LLM: available
+2026-07-16 13:37:10,689 [INFO] main: ============================================================
+2026-07-16 13:37:18,825 [INFO] retriever: Query classified: {'query_type': 'feature_usage', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'docs'}
+2026-07-16 13:37:18,846 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event CollectionQueryEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 13:37:18,859 [INFO] retriever: Retrieved 5 results for query (type=feature_usage, multi_doc=False)
+2026-07-16 13:37:18,860 [INFO] multi_doc_reasoner: Multi-doc analysis: 5 sources, 4 contradictions, 1 version notes
+2026-07-16 13:37:19,603 [ERROR] response_generator: Gemini generation failed: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use a newer model for the latest features and improvements.. Using fallback.
+2026-07-16 13:37:34,614 [INFO] retriever: Query classified: {'query_type': 'troubleshooting', 'has_negation': True, 'is_multi_doc': True, 'source_preference': 'both'}
+2026-07-16 13:37:34,820 [INFO] retriever: Retrieved 5 results for query (type=troubleshooting, multi_doc=True)
+2026-07-16 13:37:34,822 [INFO] multi_doc_reasoner: Multi-doc analysis: 4 sources, 3 contradictions, 1 version notes
+2026-07-16 13:37:35,271 [ERROR] response_generator: Gemini generation failed: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use a newer model for the latest features and improvements.. Using fallback.
+2026-07-16 13:37:50,285 [INFO] retriever: Query classified: {'query_type': 'billing_issue', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'both'}
+2026-07-16 13:37:50,411 [INFO] retriever: Retrieved 5 results for query (type=billing_issue, multi_doc=False)
+2026-07-16 13:37:50,413 [INFO] multi_doc_reasoner: Multi-doc analysis: 2 sources, 0 contradictions, 0 version notes
+2026-07-16 13:37:50,733 [ERROR] response_generator: Gemini generation failed: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use a newer model for the latest features and improvements.. Using fallback.
+2026-07-16 13:38:05,735 [INFO] retriever: Query classified: {'query_type': 'feature_usage', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'docs'}
+2026-07-16 13:38:05,866 [INFO] retriever: Retrieved 5 results for query (type=feature_usage, multi_doc=False)
+2026-07-16 13:38:05,869 [INFO] multi_doc_reasoner: Multi-doc analysis: 4 sources, 4 contradictions, 2 version notes
+2026-07-16 13:38:06,194 [ERROR] response_generator: Gemini generation failed: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use a newer model for the latest features and improvements.. Using fallback.
+2026-07-16 13:38:21,197 [INFO] retriever: Query classified: {'query_type': 'troubleshooting', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'both'}
+2026-07-16 13:38:21,328 [INFO] retriever: Retrieved 5 results for query (type=troubleshooting, multi_doc=False)
+2026-07-16 13:38:21,330 [INFO] multi_doc_reasoner: Multi-doc analysis: 2 sources, 1 contradictions, 1 version notes
+2026-07-16 13:38:21,649 [ERROR] response_generator: Gemini generation failed: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use a newer model for the latest features and improvements.. Using fallback.
+2026-07-16 13:38:36,648 [INFO] retriever: Query classified: {'query_type': 'comparison', 'has_negation': False, 'is_multi_doc': True, 'source_preference': 'docs'}
+2026-07-16 13:38:36,771 [INFO] retriever: Retrieved 5 results for query (type=comparison, multi_doc=True)
+2026-07-16 13:38:36,773 [INFO] multi_doc_reasoner: Multi-doc analysis: 3 sources, 0 contradictions, 0 version notes
+2026-07-16 13:38:37,090 [ERROR] response_generator: Gemini generation failed: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use a newer model for the latest features and improvements.. Using fallback.
+2026-07-16 13:38:52,089 [INFO] retriever: Query classified: {'query_type': 'feature_usage', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'docs'}
+2026-07-16 13:38:52,231 [INFO] retriever: Retrieved 5 results for query (type=feature_usage, multi_doc=False)
+2026-07-16 13:38:52,234 [INFO] multi_doc_reasoner: Multi-doc analysis: 3 sources, 0 contradictions, 0 version notes
+2026-07-16 13:38:52,571 [ERROR] response_generator: Gemini generation failed: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use a newer model for the latest features and improvements.. Using fallback.
+2026-07-16 13:39:07,575 [INFO] retriever: Query classified: {'query_type': 'troubleshooting', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'both'}
+2026-07-16 13:39:07,627 [INFO] retriever: Retrieved 5 results for query (type=troubleshooting, multi_doc=False)
+2026-07-16 13:39:07,628 [INFO] multi_doc_reasoner: Multi-doc analysis: 1 sources, 0 contradictions, 0 version notes
+2026-07-16 13:39:08,050 [ERROR] response_generator: Gemini generation failed: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use a newer model for the latest features and improvements.. Using fallback.
+2026-07-16 13:39:23,057 [INFO] retriever: Query classified: {'query_type': 'developer', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'docs'}
+2026-07-16 13:39:23,079 [INFO] retriever: Retrieved 5 results for query (type=developer, multi_doc=False)
+2026-07-16 13:39:23,079 [INFO] multi_doc_reasoner: Multi-doc analysis: 2 sources, 1 contradictions, 1 version notes
+2026-07-16 13:39:23,405 [ERROR] response_generator: Gemini generation failed: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use a newer model for the latest features and improvements.. Using fallback.
+2026-07-16 13:39:38,409 [INFO] retriever: Query classified: {'query_type': 'troubleshooting', 'has_negation': True, 'is_multi_doc': False, 'source_preference': 'both'}
+2026-07-16 13:39:38,473 [INFO] retriever: Retrieved 5 results for query (type=troubleshooting, multi_doc=False)
+2026-07-16 13:39:38,474 [INFO] multi_doc_reasoner: Multi-doc analysis: 2 sources, 0 contradictions, 0 version notes
+2026-07-16 13:39:38,869 [ERROR] response_generator: Gemini generation failed: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use a newer model for the latest features and improvements.. Using fallback.
+2026-07-16 13:39:53,895 [INFO] retriever: Query classified: {'query_type': 'security', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'docs'}
+2026-07-16 13:39:53,939 [INFO] retriever: Retrieved 5 results for query (type=security, multi_doc=False)
+2026-07-16 13:39:53,940 [INFO] multi_doc_reasoner: Multi-doc analysis: 3 sources, 0 contradictions, 0 version notes
+2026-07-16 13:39:54,246 [ERROR] response_generator: Gemini generation failed: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use a newer model for the latest features and improvements.. Using fallback.
+2026-07-16 13:40:12,465 [INFO] main: ============================================================
+2026-07-16 13:40:12,466 [INFO] main: Initializing RAG Pipeline...
+2026-07-16 13:40:12,466 [INFO] main: ============================================================
+2026-07-16 13:40:12,467 [INFO] main: Step 1/3: Processing documents...
+2026-07-16 13:40:12,468 [INFO] document_processor: Starting document processing...
+2026-07-16 13:40:12,469 [INFO] document_processor: Loaded 7 product documents
+2026-07-16 13:40:12,470 [INFO] document_processor: Loaded 8 support tickets
+2026-07-16 13:40:12,481 [INFO] document_processor: Total chunks created: 82
+2026-07-16 13:40:12,481 [INFO] main: Step 2/3: Building indices (this may take a moment on first run)...
+2026-07-16 13:40:12,482 [INFO] indexer: Initializing indexer...
+2026-07-16 13:40:12,483 [INFO] indexer: Loading embedding model: all-MiniLM-L6-v2
+2026-07-16 13:40:12,486 [INFO] sentence_transformers.SentenceTransformer: Use pytorch device_name: cpu
+2026-07-16 13:40:12,487 [INFO] sentence_transformers.SentenceTransformer: Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2026-07-16 13:40:12,736 [INFO] indexer: Embedding model loaded successfully
+2026-07-16 13:40:12,737 [INFO] indexer: Building ChromaDB vector index...
+2026-07-16 13:40:12,819 [INFO] chromadb.telemetry.product.posthog: Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2026-07-16 13:40:13,142 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event ClientStartEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 13:40:13,220 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event ClientCreateCollectionEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 13:40:13,220 [INFO] indexer: Generating embeddings for 82 chunks...
+2026-07-16 13:40:15,053 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event CollectionAddEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 13:40:15,053 [INFO] indexer: ChromaDB index built with 82 vectors
+2026-07-16 13:40:15,054 [INFO] indexer: Building TF-IDF keyword index...
+2026-07-16 13:40:15,065 [INFO] indexer: TF-IDF index built: (82, 2818)
+2026-07-16 13:40:15,075 [INFO] indexer: TF-IDF index persisted to disk
+2026-07-16 13:40:15,075 [INFO] indexer: Indexer initialization complete
+2026-07-16 13:40:15,075 [INFO] main: Step 3/3: Initializing retriever and response generator...
+2026-07-16 13:40:15,075 [INFO] response_generator: Gemini model initialized: gemini-1.5-flash
+2026-07-16 13:40:15,077 [INFO] main: Pipeline initialized in 2.6s
+2026-07-16 13:40:15,077 [INFO] main:   - Chunks indexed: 82
+2026-07-16 13:40:15,078 [INFO] main:   - Gemini LLM: available
+2026-07-16 13:40:15,078 [INFO] main: ============================================================
+2026-07-16 13:40:23,998 [INFO] retriever: Query classified: {'query_type': 'feature_usage', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'docs'}
+2026-07-16 13:40:24,022 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event CollectionQueryEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 13:40:24,034 [INFO] retriever: Retrieved 5 results for query (type=feature_usage, multi_doc=False)
+2026-07-16 13:40:24,034 [INFO] multi_doc_reasoner: Multi-doc analysis: 5 sources, 4 contradictions, 1 version notes
+2026-07-16 13:40:24,539 [ERROR] response_generator: Gemini generation failed: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.. Using fallback.
+2026-07-16 13:40:39,555 [INFO] retriever: Query classified: {'query_type': 'troubleshooting', 'has_negation': True, 'is_multi_doc': True, 'source_preference': 'both'}
+2026-07-16 13:40:39,578 [INFO] retriever: Retrieved 5 results for query (type=troubleshooting, multi_doc=True)
+2026-07-16 13:40:39,578 [INFO] multi_doc_reasoner: Multi-doc analysis: 4 sources, 3 contradictions, 1 version notes
+2026-07-16 13:40:39,796 [ERROR] response_generator: Gemini generation failed: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.. Using fallback.
+2026-07-16 13:40:54,813 [INFO] retriever: Query classified: {'query_type': 'billing_issue', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'both'}
+2026-07-16 13:40:54,834 [INFO] retriever: Retrieved 5 results for query (type=billing_issue, multi_doc=False)
+2026-07-16 13:40:54,835 [INFO] multi_doc_reasoner: Multi-doc analysis: 2 sources, 0 contradictions, 0 version notes
+2026-07-16 13:40:55,050 [ERROR] response_generator: Gemini generation failed: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.. Using fallback.
+2026-07-16 13:41:10,054 [INFO] retriever: Query classified: {'query_type': 'feature_usage', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'docs'}
+2026-07-16 13:41:10,090 [INFO] retriever: Retrieved 5 results for query (type=feature_usage, multi_doc=False)
+2026-07-16 13:41:10,090 [INFO] multi_doc_reasoner: Multi-doc analysis: 4 sources, 4 contradictions, 2 version notes
+2026-07-16 13:41:10,316 [ERROR] response_generator: Gemini generation failed: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.. Using fallback.
+2026-07-16 13:42:03,857 [INFO] main: ============================================================
+2026-07-16 13:42:03,858 [INFO] main: Initializing RAG Pipeline...
+2026-07-16 13:42:03,858 [INFO] main: ============================================================
+2026-07-16 13:42:03,859 [INFO] main: Step 1/3: Processing documents...
+2026-07-16 13:42:03,860 [INFO] document_processor: Starting document processing...
+2026-07-16 13:42:03,861 [INFO] document_processor: Loaded 7 product documents
+2026-07-16 13:42:03,862 [INFO] document_processor: Loaded 8 support tickets
+2026-07-16 13:42:03,871 [INFO] document_processor: Total chunks created: 82
+2026-07-16 13:42:03,871 [INFO] main: Step 2/3: Building indices (this may take a moment on first run)...
+2026-07-16 13:42:03,872 [INFO] indexer: Initializing indexer...
+2026-07-16 13:42:03,872 [INFO] indexer: Loading embedding model: all-MiniLM-L6-v2
+2026-07-16 13:42:03,877 [INFO] sentence_transformers.SentenceTransformer: Use pytorch device_name: cpu
+2026-07-16 13:42:03,878 [INFO] sentence_transformers.SentenceTransformer: Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2026-07-16 13:42:04,047 [INFO] indexer: Embedding model loaded successfully
+2026-07-16 13:42:04,047 [INFO] indexer: Building ChromaDB vector index...
+2026-07-16 13:42:04,139 [INFO] chromadb.telemetry.product.posthog: Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2026-07-16 13:42:04,501 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event ClientStartEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 13:42:04,588 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event ClientCreateCollectionEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 13:42:04,588 [INFO] indexer: Generating embeddings for 82 chunks...
+2026-07-16 13:42:06,807 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event CollectionAddEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 13:42:06,808 [INFO] indexer: ChromaDB index built with 82 vectors
+2026-07-16 13:42:06,808 [INFO] indexer: Building TF-IDF keyword index...
+2026-07-16 13:42:06,827 [INFO] indexer: TF-IDF index built: (82, 2818)
+2026-07-16 13:42:06,836 [INFO] indexer: TF-IDF index persisted to disk
+2026-07-16 13:42:06,836 [INFO] indexer: Indexer initialization complete
+2026-07-16 13:42:06,836 [INFO] main: Step 3/3: Initializing retriever and response generator...
+2026-07-16 13:42:06,837 [INFO] response_generator: Gemini model initialized: gemini-1.5-flash-latest
+2026-07-16 13:42:06,838 [INFO] main: Pipeline initialized in 3.0s
+2026-07-16 13:42:06,838 [INFO] main:   - Chunks indexed: 82
+2026-07-16 13:42:06,839 [INFO] main:   - Gemini LLM: available
+2026-07-16 13:42:06,839 [INFO] main: ============================================================
+2026-07-16 13:42:14,318 [INFO] retriever: Query classified: {'query_type': 'feature_usage', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'docs'}
+2026-07-16 13:42:14,336 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event CollectionQueryEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 13:42:14,349 [INFO] retriever: Retrieved 5 results for query (type=feature_usage, multi_doc=False)
+2026-07-16 13:42:14,349 [INFO] multi_doc_reasoner: Multi-doc analysis: 5 sources, 4 contradictions, 1 version notes
+2026-07-16 13:42:14,927 [ERROR] response_generator: Gemini generation failed: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.. Using fallback.
+2026-07-16 13:42:29,929 [INFO] retriever: Query classified: {'query_type': 'troubleshooting', 'has_negation': True, 'is_multi_doc': True, 'source_preference': 'both'}
+2026-07-16 13:42:29,954 [INFO] retriever: Retrieved 5 results for query (type=troubleshooting, multi_doc=True)
+2026-07-16 13:42:29,954 [INFO] multi_doc_reasoner: Multi-doc analysis: 4 sources, 3 contradictions, 1 version notes
+2026-07-16 13:42:30,200 [ERROR] response_generator: Gemini generation failed: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.. Using fallback.
+2026-07-16 13:42:45,205 [INFO] retriever: Query classified: {'query_type': 'billing_issue', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'both'}
+2026-07-16 13:42:45,226 [INFO] retriever: Retrieved 5 results for query (type=billing_issue, multi_doc=False)
+2026-07-16 13:42:45,226 [INFO] multi_doc_reasoner: Multi-doc analysis: 2 sources, 0 contradictions, 0 version notes
+2026-07-16 13:42:45,442 [ERROR] response_generator: Gemini generation failed: 404 models/gemini-1.5-flash-latest is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.. Using fallback.
+2026-07-16 13:47:34,027 [INFO] main: ============================================================
+2026-07-16 13:47:34,029 [INFO] main: Initializing RAG Pipeline...
+2026-07-16 13:47:34,029 [INFO] main: ============================================================
+2026-07-16 13:47:34,030 [INFO] main: Step 1/3: Processing documents...
+2026-07-16 13:47:34,031 [INFO] document_processor: Starting document processing...
+2026-07-16 13:47:34,033 [INFO] document_processor: Loaded 7 product documents
+2026-07-16 13:47:34,034 [INFO] document_processor: Loaded 8 support tickets
+2026-07-16 13:47:34,041 [INFO] document_processor: Total chunks created: 82
+2026-07-16 13:47:34,042 [INFO] main: Step 2/3: Building indices (this may take a moment on first run)...
+2026-07-16 13:47:34,043 [INFO] indexer: Initializing indexer...
+2026-07-16 13:47:34,044 [INFO] indexer: Loading embedding model: all-MiniLM-L6-v2
+2026-07-16 13:47:34,049 [INFO] sentence_transformers.SentenceTransformer: Use pytorch device_name: cpu
+2026-07-16 13:47:34,050 [INFO] sentence_transformers.SentenceTransformer: Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2026-07-16 13:47:34,339 [INFO] indexer: Embedding model loaded successfully
+2026-07-16 13:47:34,340 [INFO] indexer: Building ChromaDB vector index...
+2026-07-16 13:47:34,435 [INFO] chromadb.telemetry.product.posthog: Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2026-07-16 13:47:34,816 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event ClientStartEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 13:47:34,912 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event ClientCreateCollectionEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 13:47:34,913 [INFO] indexer: Generating embeddings for 82 chunks...
+2026-07-16 13:47:37,112 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event CollectionAddEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 13:47:37,112 [INFO] indexer: ChromaDB index built with 82 vectors
+2026-07-16 13:47:37,113 [INFO] indexer: Building TF-IDF keyword index...
+2026-07-16 13:47:37,131 [INFO] indexer: TF-IDF index built: (82, 2818)
+2026-07-16 13:47:37,142 [INFO] indexer: TF-IDF index persisted to disk
+2026-07-16 13:47:37,142 [INFO] indexer: Indexer initialization complete
+2026-07-16 13:47:37,143 [INFO] main: Step 3/3: Initializing retriever and response generator...
+2026-07-16 13:47:37,144 [INFO] response_generator: Gemini model initialized: gemini-2.0-flash
+2026-07-16 13:47:37,145 [INFO] main: Pipeline initialized in 3.1s
+2026-07-16 13:47:37,145 [INFO] main:   - Chunks indexed: 82
+2026-07-16 13:47:37,146 [INFO] main:   - Gemini LLM: available
+2026-07-16 13:47:37,147 [INFO] main: ============================================================
+2026-07-16 13:47:43,446 [INFO] retriever: Query classified: {'query_type': 'feature_usage', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'docs'}
+2026-07-16 13:47:43,465 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event CollectionQueryEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 13:47:43,478 [INFO] retriever: Retrieved 5 results for query (type=feature_usage, multi_doc=False)
+2026-07-16 13:47:43,478 [INFO] multi_doc_reasoner: Multi-doc analysis: 5 sources, 4 contradictions, 1 version notes
+2026-07-16 13:47:44,665 [ERROR] response_generator: Gemini generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+Please retry in 13.338051968s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 13
+}
+]. Using fallback.
+2026-07-16 13:47:59,693 [INFO] retriever: Query classified: {'query_type': 'troubleshooting', 'has_negation': True, 'is_multi_doc': True, 'source_preference': 'both'}
+2026-07-16 13:47:59,716 [INFO] retriever: Retrieved 5 results for query (type=troubleshooting, multi_doc=True)
+2026-07-16 13:47:59,716 [INFO] multi_doc_reasoner: Multi-doc analysis: 4 sources, 3 contradictions, 1 version notes
+2026-07-16 13:48:00,020 [ERROR] response_generator: Gemini generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+Please retry in 57.948215666s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 57
+}
+]. Using fallback.
+2026-07-16 13:48:15,037 [INFO] retriever: Query classified: {'query_type': 'billing_issue', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'both'}
+2026-07-16 13:48:15,158 [INFO] retriever: Retrieved 5 results for query (type=billing_issue, multi_doc=False)
+2026-07-16 13:48:15,160 [INFO] multi_doc_reasoner: Multi-doc analysis: 2 sources, 0 contradictions, 0 version notes
+2026-07-16 13:48:15,383 [ERROR] response_generator: Gemini generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+Please retry in 42.521373418s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 42
+}
+]. Using fallback.
+2026-07-16 13:48:30,407 [INFO] retriever: Query classified: {'query_type': 'feature_usage', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'docs'}
+2026-07-16 13:48:30,564 [INFO] retriever: Retrieved 5 results for query (type=feature_usage, multi_doc=False)
+2026-07-16 13:48:30,565 [INFO] multi_doc_reasoner: Multi-doc analysis: 4 sources, 4 contradictions, 2 version notes
+2026-07-16 13:48:30,945 [ERROR] response_generator: Gemini generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+Please retry in 27.059377808s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 27
+}
+]. Using fallback.
+2026-07-16 13:48:45,948 [INFO] retriever: Query classified: {'query_type': 'troubleshooting', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'both'}
+2026-07-16 13:48:46,601 [INFO] retriever: Retrieved 5 results for query (type=troubleshooting, multi_doc=False)
+2026-07-16 13:48:46,602 [INFO] multi_doc_reasoner: Multi-doc analysis: 2 sources, 1 contradictions, 1 version notes
+2026-07-16 13:48:46,925 [ERROR] response_generator: Gemini generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+Please retry in 11.019896387s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 11
+}
+]. Using fallback.
+2026-07-16 13:49:01,915 [INFO] retriever: Query classified: {'query_type': 'comparison', 'has_negation': False, 'is_multi_doc': True, 'source_preference': 'docs'}
+2026-07-16 13:49:01,936 [INFO] retriever: Retrieved 5 results for query (type=comparison, multi_doc=True)
+2026-07-16 13:49:01,936 [INFO] multi_doc_reasoner: Multi-doc analysis: 3 sources, 0 contradictions, 0 version notes
+2026-07-16 13:49:02,283 [ERROR] response_generator: Gemini generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+Please retry in 55.728369612s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 55
+}
+]. Using fallback.
+2026-07-16 13:49:17,282 [INFO] retriever: Query classified: {'query_type': 'feature_usage', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'docs'}
+2026-07-16 13:49:17,303 [INFO] retriever: Retrieved 5 results for query (type=feature_usage, multi_doc=False)
+2026-07-16 13:49:17,304 [INFO] multi_doc_reasoner: Multi-doc analysis: 3 sources, 0 contradictions, 0 version notes
+2026-07-16 13:49:17,643 [ERROR] response_generator: Gemini generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+Please retry in 40.379250509s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 40
+}
+]. Using fallback.
+2026-07-16 13:49:32,650 [INFO] retriever: Query classified: {'query_type': 'troubleshooting', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'both'}
+2026-07-16 13:49:32,675 [INFO] retriever: Retrieved 5 results for query (type=troubleshooting, multi_doc=False)
+2026-07-16 13:49:32,676 [INFO] multi_doc_reasoner: Multi-doc analysis: 1 sources, 0 contradictions, 0 version notes
+2026-07-16 13:49:32,898 [ERROR] response_generator: Gemini generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+Please retry in 25.01693438s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 25
+}
+]. Using fallback.
+2026-07-16 13:49:47,900 [INFO] retriever: Query classified: {'query_type': 'developer', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'docs'}
+2026-07-16 13:49:47,922 [INFO] retriever: Retrieved 5 results for query (type=developer, multi_doc=False)
+2026-07-16 13:49:47,923 [INFO] multi_doc_reasoner: Multi-doc analysis: 2 sources, 1 contradictions, 1 version notes
+2026-07-16 13:49:48,150 [ERROR] response_generator: Gemini generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+Please retry in 9.758269883s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 9
+}
+]. Using fallback.
+2026-07-16 13:50:03,176 [INFO] retriever: Query classified: {'query_type': 'troubleshooting', 'has_negation': True, 'is_multi_doc': False, 'source_preference': 'both'}
+2026-07-16 13:50:03,202 [INFO] retriever: Retrieved 5 results for query (type=troubleshooting, multi_doc=False)
+2026-07-16 13:50:03,202 [INFO] multi_doc_reasoner: Multi-doc analysis: 1 sources, 0 contradictions, 0 version notes
+2026-07-16 13:50:03,425 [ERROR] response_generator: Gemini generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+Please retry in 54.483086895s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 54
+}
+]. Using fallback.
+2026-07-16 13:50:18,450 [INFO] retriever: Query classified: {'query_type': 'security', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'docs'}
+2026-07-16 13:50:18,509 [INFO] retriever: Retrieved 5 results for query (type=security, multi_doc=False)
+2026-07-16 13:50:18,511 [INFO] multi_doc_reasoner: Multi-doc analysis: 3 sources, 0 contradictions, 0 version notes
+2026-07-16 13:50:18,734 [ERROR] response_generator: Gemini generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+Please retry in 39.173930133s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 39
+}
+]. Using fallback.
+2026-07-16 13:50:33,724 [INFO] retriever: Query classified: {'query_type': 'billing_issue', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'both'}
+2026-07-16 13:50:33,782 [INFO] retriever: Retrieved 5 results for query (type=billing_issue, multi_doc=False)
+2026-07-16 13:50:33,782 [INFO] multi_doc_reasoner: Multi-doc analysis: 2 sources, 0 contradictions, 0 version notes
+2026-07-16 13:50:34,031 [ERROR] response_generator: Gemini generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+Please retry in 23.888169455s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 23
+}
+]. Using fallback.
+2026-07-16 13:50:49,033 [INFO] main: Evaluation results saved to C:\Users\SMART TECH\Desktop\Evaluation Task\response.json
+2026-07-16 14:00:12,645 [INFO] main: Shutting down RAG system
+2026-07-16 14:15:14,437 [INFO] main: ============================================================
+2026-07-16 14:15:14,438 [INFO] main: Initializing RAG Pipeline...
+2026-07-16 14:15:14,438 [INFO] main: ============================================================
+2026-07-16 14:15:14,438 [INFO] main: Step 1/3: Processing documents...
+2026-07-16 14:15:14,438 [INFO] document_processor: Starting document processing...
+2026-07-16 14:15:14,439 [INFO] document_processor: Loaded 7 product documents
+2026-07-16 14:15:14,439 [INFO] document_processor: Loaded 8 support tickets
+2026-07-16 14:15:14,443 [INFO] document_processor: Total chunks created: 82
+2026-07-16 14:15:14,443 [INFO] main: Step 2/3: Building indices (this may take a moment on first run)...
+2026-07-16 14:15:14,443 [INFO] indexer: Initializing indexer...
+2026-07-16 14:15:14,443 [INFO] indexer: Loading embedding model: all-MiniLM-L6-v2
+2026-07-16 14:15:14,445 [INFO] sentence_transformers.SentenceTransformer: Use pytorch device_name: cpu
+2026-07-16 14:15:14,445 [INFO] sentence_transformers.SentenceTransformer: Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2026-07-16 14:15:14,565 [INFO] indexer: Embedding model loaded successfully
+2026-07-16 14:15:14,566 [INFO] indexer: Building ChromaDB vector index...
+2026-07-16 14:15:14,605 [INFO] chromadb.telemetry.product.posthog: Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2026-07-16 14:15:14,773 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event ClientStartEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 14:15:14,834 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event ClientCreateCollectionEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 14:15:14,835 [INFO] indexer: Generating embeddings for 82 chunks...
+2026-07-16 14:15:16,653 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event CollectionAddEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 14:15:16,653 [INFO] indexer: ChromaDB index built with 82 vectors
+2026-07-16 14:15:16,654 [INFO] indexer: Building TF-IDF keyword index...
+2026-07-16 14:15:16,668 [INFO] indexer: TF-IDF index built: (82, 2818)
+2026-07-16 14:15:16,684 [INFO] indexer: TF-IDF index persisted to disk
+2026-07-16 14:15:16,684 [INFO] indexer: Indexer initialization complete
+2026-07-16 14:15:16,684 [INFO] main: Step 3/3: Initializing retriever and response generator...
+2026-07-16 14:15:16,684 [INFO] response_generator: Gemini model initialized: gemini-2.0-flash
+2026-07-16 14:15:16,685 [INFO] main: Pipeline initialized in 2.2s
+2026-07-16 14:15:16,685 [INFO] main:   - Chunks indexed: 82
+2026-07-16 14:15:16,685 [INFO] main:   - Gemini LLM: available
+2026-07-16 14:15:16,685 [INFO] main: ============================================================
+2026-07-16 14:15:34,959 [INFO] retriever: Query classified: {'query_type': 'feature_usage', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'docs'}
+2026-07-16 14:15:34,996 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event CollectionQueryEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 14:15:35,008 [INFO] retriever: Retrieved 5 results for query (type=feature_usage, multi_doc=False)
+2026-07-16 14:15:35,009 [INFO] multi_doc_reasoner: Multi-doc analysis: 5 sources, 4 contradictions, 1 version notes
+2026-07-16 14:15:36,158 [ERROR] response_generator: Gemini generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+Please retry in 21.80450367s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 21
+}
+]. Using fallback.
+2026-07-16 14:15:51,166 [INFO] retriever: Query classified: {'query_type': 'troubleshooting', 'has_negation': True, 'is_multi_doc': True, 'source_preference': 'both'}
+2026-07-16 14:15:51,199 [INFO] retriever: Retrieved 5 results for query (type=troubleshooting, multi_doc=True)
+2026-07-16 14:15:51,199 [INFO] multi_doc_reasoner: Multi-doc analysis: 4 sources, 3 contradictions, 1 version notes
+2026-07-16 14:15:51,436 [ERROR] response_generator: Gemini generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+Please retry in 6.465607702s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 6
+}
+]. Using fallback.
+2026-07-16 14:15:58,021 [INFO] retriever: Query classified: {'query_type': 'feature_usage', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'docs'}
+2026-07-16 14:15:58,060 [INFO] retriever: Retrieved 5 results for query (type=feature_usage, multi_doc=False)
+2026-07-16 14:15:58,060 [INFO] multi_doc_reasoner: Multi-doc analysis: 3 sources, 0 contradictions, 0 version notes
+2026-07-16 14:15:58,379 [ERROR] response_generator: Gemini generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+Please retry in 59.596645081s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 59
+}
+]. Using fallback.
+2026-07-16 14:15:58,379 [INFO] main: Query processed in 358ms: 'how do i share folder?...' -> HIGH confidence, 3 sources
+2026-07-16 14:16:06,432 [INFO] retriever: Query classified: {'query_type': 'billing_issue', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'both'}
+2026-07-16 14:16:06,509 [INFO] retriever: Retrieved 5 results for query (type=billing_issue, multi_doc=False)
+2026-07-16 14:16:06,510 [INFO] multi_doc_reasoner: Multi-doc analysis: 2 sources, 0 contradictions, 0 version notes
+2026-07-16 14:16:06,734 [ERROR] response_generator: Gemini generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+Please retry in 51.1697091s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 51
+}
+]. Using fallback.
+2026-07-16 14:16:21,727 [INFO] retriever: Query classified: {'query_type': 'feature_usage', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'docs'}
+2026-07-16 14:16:21,802 [INFO] retriever: Retrieved 5 results for query (type=feature_usage, multi_doc=False)
+2026-07-16 14:16:21,802 [INFO] multi_doc_reasoner: Multi-doc analysis: 4 sources, 4 contradictions, 2 version notes
+2026-07-16 14:16:22,134 [ERROR] response_generator: Gemini generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+Please retry in 35.85880491s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 35
+}
+]. Using fallback.
+2026-07-16 14:16:37,154 [INFO] retriever: Query classified: {'query_type': 'troubleshooting', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'both'}
+2026-07-16 14:16:37,407 [INFO] retriever: Retrieved 5 results for query (type=troubleshooting, multi_doc=False)
+2026-07-16 14:16:37,409 [INFO] multi_doc_reasoner: Multi-doc analysis: 2 sources, 1 contradictions, 1 version notes
+2026-07-16 14:16:37,641 [ERROR] response_generator: Gemini generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+Please retry in 20.261944165s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 20
+}
+]. Using fallback.
+2026-07-16 14:16:52,636 [INFO] retriever: Query classified: {'query_type': 'comparison', 'has_negation': False, 'is_multi_doc': True, 'source_preference': 'docs'}
+2026-07-16 14:16:52,711 [INFO] retriever: Retrieved 5 results for query (type=comparison, multi_doc=True)
+2026-07-16 14:16:52,711 [INFO] multi_doc_reasoner: Multi-doc analysis: 3 sources, 0 contradictions, 0 version notes
+2026-07-16 14:16:52,946 [ERROR] response_generator: Gemini generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+Please retry in 4.954791744s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 4
+}
+]. Using fallback.
+2026-07-16 14:17:07,950 [INFO] retriever: Query classified: {'query_type': 'feature_usage', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'docs'}
+2026-07-16 14:17:08,023 [INFO] retriever: Retrieved 5 results for query (type=feature_usage, multi_doc=False)
+2026-07-16 14:17:08,024 [INFO] multi_doc_reasoner: Multi-doc analysis: 4 sources, 3 contradictions, 1 version notes
+2026-07-16 14:17:08,253 [ERROR] response_generator: Gemini generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+Please retry in 49.653999651s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 49
+}
+]. Using fallback.
+2026-07-16 14:17:23,259 [INFO] retriever: Query classified: {'query_type': 'troubleshooting', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'both'}
+2026-07-16 14:17:23,337 [INFO] retriever: Retrieved 5 results for query (type=troubleshooting, multi_doc=False)
+2026-07-16 14:17:23,337 [INFO] multi_doc_reasoner: Multi-doc analysis: 1 sources, 0 contradictions, 0 version notes
+2026-07-16 14:17:23,560 [ERROR] response_generator: Gemini generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+Please retry in 34.342964718s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 34
+}
+]. Using fallback.
+2026-07-16 14:17:38,543 [INFO] retriever: Query classified: {'query_type': 'developer', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'docs'}
+2026-07-16 14:17:38,668 [INFO] retriever: Retrieved 5 results for query (type=developer, multi_doc=False)
+2026-07-16 14:17:38,669 [INFO] multi_doc_reasoner: Multi-doc analysis: 2 sources, 1 contradictions, 1 version notes
+2026-07-16 14:17:38,899 [ERROR] response_generator: Gemini generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+Please retry in 19.006947118s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 19
+}
+]. Using fallback.
+2026-07-16 14:17:53,898 [INFO] retriever: Query classified: {'query_type': 'troubleshooting', 'has_negation': True, 'is_multi_doc': False, 'source_preference': 'both'}
+2026-07-16 14:17:53,977 [INFO] retriever: Retrieved 5 results for query (type=troubleshooting, multi_doc=False)
+2026-07-16 14:17:53,978 [INFO] multi_doc_reasoner: Multi-doc analysis: 2 sources, 0 contradictions, 0 version notes
+2026-07-16 14:17:55,219 [ERROR] response_generator: Gemini generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+Please retry in 3.691654228s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 3
+}
+]. Using fallback.
+2026-07-16 14:18:10,237 [INFO] retriever: Query classified: {'query_type': 'security', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'docs'}
+2026-07-16 14:18:10,326 [INFO] retriever: Retrieved 5 results for query (type=security, multi_doc=False)
+2026-07-16 14:18:10,328 [INFO] multi_doc_reasoner: Multi-doc analysis: 3 sources, 0 contradictions, 0 version notes
+2026-07-16 14:18:10,547 [ERROR] response_generator: Gemini generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+Please retry in 47.357850052s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 47
+}
+]. Using fallback.
+2026-07-16 14:18:25,555 [INFO] retriever: Query classified: {'query_type': 'billing_issue', 'has_negation': False, 'is_multi_doc': False, 'source_preference': 'both'}
+2026-07-16 14:18:25,680 [INFO] retriever: Retrieved 5 results for query (type=billing_issue, multi_doc=False)
+2026-07-16 14:18:25,680 [INFO] multi_doc_reasoner: Multi-doc analysis: 2 sources, 0 contradictions, 0 version notes
+2026-07-16 14:18:25,939 [ERROR] response_generator: Gemini generation failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+Please retry in 32.006734813s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 32
+}
+]. Using fallback.
+2026-07-16 14:18:40,917 [INFO] main: Evaluation results saved to C:\Users\SMART TECH\Desktop\Evaluation Task\response.json
+2026-07-16 14:26:52,487 [INFO] main: ============================================================
+2026-07-16 14:26:52,488 [INFO] main: Initializing RAG Pipeline...
+2026-07-16 14:26:52,488 [INFO] main: ============================================================
+2026-07-16 14:26:52,488 [INFO] main: Step 1/3: Processing documents...
+2026-07-16 14:26:52,488 [INFO] document_processor: Starting document processing...
+2026-07-16 14:26:52,489 [INFO] document_processor: Loaded 7 product documents
+2026-07-16 14:26:52,489 [INFO] document_processor: Loaded 8 support tickets
+2026-07-16 14:26:52,493 [INFO] document_processor: Total chunks created: 82
+2026-07-16 14:26:52,493 [INFO] main: Step 2/3: Building indices (this may take a moment on first run)...
+2026-07-16 14:26:52,494 [INFO] indexer: Initializing indexer...
+2026-07-16 14:26:52,494 [INFO] indexer: Loading embedding model: all-MiniLM-L6-v2
+2026-07-16 14:26:52,495 [INFO] sentence_transformers.SentenceTransformer: Use pytorch device_name: cpu
+2026-07-16 14:26:52,497 [INFO] sentence_transformers.SentenceTransformer: Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2026-07-16 14:26:56,779 [INFO] indexer: Embedding model loaded successfully
+2026-07-16 14:26:56,779 [INFO] indexer: Building ChromaDB vector index...
+2026-07-16 14:26:56,815 [INFO] chromadb.telemetry.product.posthog: Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2026-07-16 14:26:56,977 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event ClientStartEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 14:26:57,048 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event ClientCreateCollectionEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 14:26:57,049 [INFO] indexer: Generating embeddings for 82 chunks...
+2026-07-16 14:26:58,447 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event CollectionAddEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 14:26:58,447 [INFO] indexer: ChromaDB index built with 82 vectors
+2026-07-16 14:26:58,448 [INFO] indexer: Building TF-IDF keyword index...
+2026-07-16 14:26:58,460 [INFO] indexer: TF-IDF index built: (82, 2818)
+2026-07-16 14:26:58,468 [INFO] indexer: TF-IDF index persisted to disk
+2026-07-16 14:26:58,468 [INFO] indexer: Indexer initialization complete
+2026-07-16 14:26:58,468 [INFO] main: Step 3/3: Initializing retriever and response generator...
+2026-07-16 14:26:58,468 [INFO] response_generator: Gemini model initialized: gemini-2.0-flash
+2026-07-16 14:26:58,469 [INFO] main: Pipeline initialized in 6.0s
+2026-07-16 14:26:58,469 [INFO] main:   - Chunks indexed: 82
+2026-07-16 14:26:58,469 [INFO] main:   - Gemini LLM: available
+2026-07-16 14:26:58,469 [INFO] main: ============================================================
+2026-07-16 14:27:03,293 [INFO] main: Shutting down RAG system
+2026-07-16 14:28:41,977 [INFO] main: ============================================================
+2026-07-16 14:28:41,978 [INFO] main: Initializing RAG Pipeline...
+2026-07-16 14:28:41,978 [INFO] main: ============================================================
+2026-07-16 14:28:41,978 [INFO] main: Step 1/3: Processing documents...
+2026-07-16 14:28:41,978 [INFO] document_processor: Starting document processing...
+2026-07-16 14:28:41,979 [INFO] document_processor: Loaded 7 product documents
+2026-07-16 14:28:41,979 [INFO] document_processor: Loaded 8 support tickets
+2026-07-16 14:28:41,982 [INFO] document_processor: Total chunks created: 82
+2026-07-16 14:28:41,982 [INFO] main: Step 2/3: Building indices (this may take a moment on first run)...
+2026-07-16 14:28:41,982 [INFO] indexer: Initializing indexer...
+2026-07-16 14:28:41,983 [INFO] indexer: Loading embedding model: all-MiniLM-L6-v2
+2026-07-16 14:28:41,984 [INFO] sentence_transformers.SentenceTransformer: Use pytorch device_name: cpu
+2026-07-16 14:28:41,984 [INFO] sentence_transformers.SentenceTransformer: Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2026-07-16 14:28:46,301 [WARNING] huggingface_hub.file_download: Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2026-07-16 14:29:24,383 [INFO] indexer: Embedding model loaded successfully
+2026-07-16 14:29:24,383 [INFO] indexer: Building ChromaDB vector index...
+2026-07-16 14:29:24,429 [INFO] chromadb.telemetry.product.posthog: Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2026-07-16 14:29:25,135 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event ClientStartEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 14:29:25,175 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event ClientCreateCollectionEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 14:29:25,176 [INFO] indexer: Generating embeddings for 82 chunks...
+2026-07-16 14:29:26,673 [ERROR] chromadb.telemetry.product.posthog: Failed to send telemetry event CollectionAddEvent: capture() takes 1 positional argument but 3 were given
+2026-07-16 14:29:26,673 [INFO] indexer: ChromaDB index built with 82 vectors
+2026-07-16 14:29:26,674 [INFO] indexer: Building TF-IDF keyword index...
+2026-07-16 14:29:26,691 [INFO] indexer: TF-IDF index built: (82, 2818)
+2026-07-16 14:29:26,710 [INFO] indexer: TF-IDF index persisted to disk
+2026-07-16 14:29:26,714 [INFO] indexer: Indexer initialization complete
+2026-07-16 14:29:26,714 [INFO] main: Step 3/3: Initializing retriever and response generator...
+2026-07-16 14:29:26,715 [INFO] response_generator: Gemini model initialized: gemini-2.0-flash
+2026-07-16 14:29:26,716 [INFO] main: Pipeline initialized in 44.7s
+2026-07-16 14:29:26,717 [INFO] main:   - Chunks indexed: 82
+2026-07-16 14:29:26,720 [INFO] main:   - Gemini LLM: available
+2026-07-16 14:29:26,725 [INFO] main: ============================================================
+2026-07-16 14:29:44,381 [INFO] main: Shutting down RAG system

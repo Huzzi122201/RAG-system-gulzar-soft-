@@ -1,0 +1,336 @@
+{
+  "summary": {
+    "total_queries": 12,
+    "successful": 12,
+    "avg_retrieval_precision": 0.489,
+    "avg_retrieval_recall": 0.861,
+    "avg_keyword_coverage": 0.659,
+    "f1_score": 0.624
+  },
+  "results": [
+    {
+      "query_id": "query_001",
+      "query": "How do I create a CloudSync account?",
+      "difficulty": "easy",
+      "query_type": "factual",
+      "expected_sources": [
+        "doc_001"
+      ],
+      "retrieved_sources": [
+        "doc_002",
+        "doc_005",
+        "doc_006",
+        "doc_001",
+        "doc_003"
+      ],
+      "precision": 0.2,
+      "recall": 1.0,
+      "expected_keywords": [
+        "cloudsync.com/signup",
+        "email address",
+        "confirmation email"
+      ],
+      "keyword_hits": 3,
+      "keyword_coverage": 1.0,
+      "confidence": "HIGH",
+      "answer_preview": "### \ud83d\udcc4 From: Account Management and Billing\n*Version: v2.1*\n\nComplete guide to managing your CloudSync account and billing:\n\n*[Source: doc_003 - Account Management and Billing]*\n\n### \ud83d\udcc4 From: Security a...",
+      "source_count": 5
+    },
+    {
+      "query_id": "query_002",
+      "query": "My files aren't syncing between devices, what should I do?",
+      "difficulty": "medium",
+      "query_type": "troubleshooting",
+      "expected_sources": [
+        "doc_002",
+        "ticket_002"
+      ],
+      "retrieved_sources": [
+        "doc_001",
+        "doc_002",
+        "ticket_002",
+        "ticket_004"
+      ],
+      "precision": 0.5,
+      "recall": 1.0,
+      "expected_keywords": [
+        "internet connection",
+        "system tray",
+        "restart application"
+      ],
+      "keyword_hits": 1,
+      "keyword_coverage": 0.333,
+      "confidence": "HIGH",
+      "answer_preview": "### \ud83d\udcc4 From: Troubleshooting Sync Issues\n*Version: v2.1*\n\nWhen files aren't synchronizing properly, follow this systematic troubleshooting approach:\n\n*[Source: doc_002 - Troubleshooting Sync Issues]*\n\n...",
+      "source_count": 4
+    },
+    {
+      "query_id": "query_003",
+      "query": "I was charged for Pro but don't remember upgrading",
+      "difficulty": "medium",
+      "query_type": "billing_issue",
+      "expected_sources": [
+        "doc_003",
+        "ticket_003"
+      ],
+      "retrieved_sources": [
+        "ticket_003",
+        "doc_003"
+      ],
+      "precision": 1.0,
+      "recall": 1.0,
+      "expected_keywords": [
+        "billing history",
+        "account settings",
+        "refund policy"
+      ],
+      "keyword_hits": 1,
+      "keyword_coverage": 0.333,
+      "confidence": "HIGH",
+      "answer_preview": "### \ud83c\udfab From: Unexpected billing charge for Pro subscription\n*Version: v2.1*\n\nCustomer Response: When presented with evidence, customer recalled upgrading but forgot about it. However, they stated they ...",
+      "source_count": 2
+    },
+    {
+      "query_id": "query_004",
+      "query": "How can I access previous versions of my files?",
+      "difficulty": "easy",
+      "query_type": "feature_usage",
+      "expected_sources": [
+        "doc_004"
+      ],
+      "retrieved_sources": [
+        "ticket_002",
+        "doc_004",
+        "ticket_004",
+        "doc_005"
+      ],
+      "precision": 0.25,
+      "recall": 1.0,
+      "expected_keywords": [
+        "version history",
+        "right-click",
+        "30 days",
+        "Pro accounts"
+      ],
+      "keyword_hits": 4,
+      "keyword_coverage": 1.0,
+      "confidence": "HIGH",
+      "answer_preview": "### \ud83d\udcc4 From: Advanced Features and Settings\n*Version: v2.1*\n\n**File Versioning:**: CloudSync automatically maintains version history for all synced files:\n- Free accounts: 7 days of version history\n- P...",
+      "source_count": 4
+    },
+    {
+      "query_id": "query_005",
+      "query": "CloudSync is running very slowly, how do I fix this?",
+      "difficulty": "hard",
+      "query_type": "performance",
+      "expected_sources": [
+        "doc_004",
+        "ticket_004"
+      ],
+      "retrieved_sources": [
+        "doc_002",
+        "ticket_004"
+      ],
+      "precision": 0.5,
+      "recall": 0.5,
+      "expected_keywords": [
+        "bandwidth throttling",
+        "settings",
+        "network",
+        "version"
+      ],
+      "keyword_hits": 3,
+      "keyword_coverage": 0.75,
+      "confidence": "HIGH",
+      "answer_preview": "### \ud83c\udfab From: Extremely slow file synchronization\n*Version: v2.0*\n\nInitial Troubleshooting: 1) Verified customer's internet speed (50Mbps down/10Mbps up - adequate for CloudSync). 2) Checked server stat...",
+      "source_count": 2
+    },
+    {
+      "query_id": "query_006",
+      "query": "What are the differences between Free and Pro accounts?",
+      "difficulty": "easy",
+      "query_type": "comparison",
+      "expected_sources": [
+        "doc_001",
+        "doc_003",
+        "doc_004"
+      ],
+      "retrieved_sources": [
+        "ticket_003",
+        "doc_003",
+        "doc_006"
+      ],
+      "precision": 0.333,
+      "recall": 0.333,
+      "expected_keywords": [
+        "5GB",
+        "unlimited storage",
+        "$9.99",
+        "version history"
+      ],
+      "keyword_hits": 2,
+      "keyword_coverage": 0.5,
+      "confidence": "HIGH",
+      "answer_preview": "### \ud83d\udcc4 From: Account Management and Billing\n*Version: v2.1*\n\n**Subscription Management:**: To upgrade from Free to Pro ($9.99/month or $99/year):\n1. Go to Account Settings > Billing\n2. Select your pref...",
+      "source_count": 3
+    },
+    {
+      "query_id": "query_007",
+      "query": "How do I share folders with other people?",
+      "difficulty": "medium",
+      "query_type": "feature_usage",
+      "expected_sources": [
+        "doc_004"
+      ],
+      "retrieved_sources": [
+        "doc_007",
+        "doc_004",
+        "doc_005",
+        "ticket_005"
+      ],
+      "precision": 0.25,
+      "recall": 1.0,
+      "expected_keywords": [
+        "right-click",
+        "share",
+        "email addresses",
+        "permission levels"
+      ],
+      "keyword_hits": 4,
+      "keyword_coverage": 1.0,
+      "confidence": "HIGH",
+      "answer_preview": "### \ud83d\udcc4 From: Advanced Features and Settings\n*Version: v2.1*\n\n**Sharing and Collaboration:**: - Folder sharing: Right-click any folder > 'Share' > Enter email addresses\n- Permission levels: View-only, E...",
+      "source_count": 4
+    },
+    {
+      "query_id": "query_008",
+      "query": "The mobile app keeps crashing when I upload photos",
+      "difficulty": "hard",
+      "query_type": "technical_issue",
+      "expected_sources": [
+        "doc_005",
+        "ticket_006"
+      ],
+      "retrieved_sources": [
+        "ticket_006"
+      ],
+      "precision": 1.0,
+      "recall": 0.5,
+      "expected_keywords": [
+        "large photos",
+        "memory",
+        "app version",
+        "update"
+      ],
+      "keyword_hits": 3,
+      "keyword_coverage": 0.75,
+      "confidence": "HIGH",
+      "answer_preview": "### \ud83c\udfab From: Mobile app crashing when uploading large photos\n*Version: v2.0*\n\nCustomer Issue: iOS app crashes consistently when trying to upload photos larger than 10MB from iPhone camera. App closes i...",
+      "source_count": 1
+    },
+    {
+      "query_id": "query_009",
+      "query": "Can I use CloudSync API to integrate with my application?",
+      "difficulty": "medium",
+      "query_type": "developer",
+      "expected_sources": [
+        "doc_007"
+      ],
+      "retrieved_sources": [
+        "doc_007",
+        "doc_005"
+      ],
+      "precision": 0.5,
+      "recall": 1.0,
+      "expected_keywords": [
+        "REST API",
+        "OAuth",
+        "rate limits",
+        "SDK"
+      ],
+      "keyword_hits": 4,
+      "keyword_coverage": 1.0,
+      "confidence": "HIGH",
+      "answer_preview": "### \ud83d\udcc4 From: API and Developer Integration\n*Version: v2.1*\n\nCloudSync offers comprehensive APIs for developers and system integrators:\n\n**Getting Started:**: 1. Create developer account at developers.c...",
+      "source_count": 2
+    },
+    {
+      "query_id": "query_010",
+      "query": "I accepted a shared folder invitation but can't see the folder",
+      "difficulty": "hard",
+      "query_type": "known_issue",
+      "expected_sources": [
+        "ticket_005"
+      ],
+      "retrieved_sources": [
+        "doc_004",
+        "ticket_005"
+      ],
+      "precision": 0.5,
+      "recall": 1.0,
+      "expected_keywords": [
+        "known issue",
+        "development team",
+        "UI bug"
+      ],
+      "keyword_hits": 0,
+      "keyword_coverage": 0.0,
+      "confidence": "HIGH",
+      "answer_preview": "### \ud83c\udfab From: Shared folder not visible after accepting invitation\n*Version: v2.1*\n\nCustomer Issue: User reports they received a folder sharing invitation via email, clicked 'Accept', and received confi...",
+      "source_count": 2
+    },
+    {
+      "query_id": "query_011",
+      "query": "How secure is my data in CloudSync?",
+      "difficulty": "medium",
+      "query_type": "security",
+      "expected_sources": [
+        "doc_006"
+      ],
+      "retrieved_sources": [
+        "ticket_002",
+        "doc_004",
+        "doc_006"
+      ],
+      "precision": 0.333,
+      "recall": 1.0,
+      "expected_keywords": [
+        "AES-256",
+        "encryption",
+        "zero-knowledge",
+        "two-factor"
+      ],
+      "keyword_hits": 1,
+      "keyword_coverage": 0.25,
+      "confidence": "HIGH",
+      "answer_preview": "### \ud83d\udcc4 From: Security and Privacy Guide\n*Version: v2.1*\n\nCloudSync takes your data security and privacy seriously:\n\n**Best Practices:**: 1. Enable two-factor authentication immediately after account cr...",
+      "source_count": 3
+    },
+    {
+      "query_id": "query_012",
+      "query": "What happens if I cancel my Pro subscription?",
+      "difficulty": "easy",
+      "query_type": "cancellation",
+      "expected_sources": [
+        "doc_003"
+      ],
+      "retrieved_sources": [
+        "ticket_003",
+        "doc_003"
+      ],
+      "precision": 0.5,
+      "recall": 1.0,
+      "expected_keywords": [
+        "end of billing period",
+        "downgrade",
+        "5GB limit",
+        "read-only"
+      ],
+      "keyword_hits": 3,
+      "keyword_coverage": 0.75,
+      "confidence": "HIGH",
+      "answer_preview": "### \ud83d\udcc4 From: Account Management and Billing\n*Version: v2.1*\n\n**Cancellation Process:**: To cancel your Pro subscription:\n1. Go to Account Settings > Billing > Manage Subscription\n2. Click 'Cancel Subsc...",
+      "source_count": 2
+    }
+  ]
+}

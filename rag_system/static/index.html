@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CloudSync Support AI — RAG Customer Support System</title>
+    <meta name="description" content="AI-powered customer support assistant for CloudSync using Retrieval-Augmented Generation">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ================================================================
+           Design System — Dark Glassmorphism Theme
+           ================================================================ */
+        :root {
+            --bg-primary: #0a0e1a;
+            --bg-secondary: #111827;
+            --bg-card: rgba(17, 24, 39, 0.7);
+            --bg-glass: rgba(255, 255, 255, 0.04);
+            --bg-glass-hover: rgba(255, 255, 255, 0.08);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --border-active: rgba(99, 102, 241, 0.5);
+
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+
+            --accent-indigo: #818cf8;
+            --accent-violet: #a78bfa;
+            --accent-cyan: #22d3ee;
+            --accent-emerald: #34d399;
+            --accent-amber: #fbbf24;
+            --accent-rose: #fb7185;
+
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-accent: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
+            --gradient-success: linear-gradient(135deg, #34d399 0%, #22d3ee 100%);
+            --gradient-warning: linear-gradient(135deg, #fbbf24 0%, #fb923c 100%);
+
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.5);
+            --shadow-glow: 0 0 30px rgba(99, 102, 241, 0.15);
+
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+
+            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated background mesh */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(168, 85, 247, 0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(34, 211, 238, 0.04) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+            animation: meshFloat 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes meshFloat {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.05) translate(-10px, -10px); }
+        }
+
+        /* ================================================================
+           Layout
+           ================================================================ */
+        .app-container {
+            position: relative;
+            z-index: 1;
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 24px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ================================================================
+           Header
+           ================================================================ */
+        .header {
+            text-align: center;
+            padding: 32px 0 24px;
+            position: relative;
+        }
+
+        .header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--accent-indigo);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-badge .dot {
+            width: 6px; height: 6px;
+            background: var(--accent-emerald);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+
+        .header p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 400;
+        }
+
+        /* ================================================================
+           Search Input
+           ================================================================ */
+        .search-container {
+            position: relative;
+            margin: 20px 0;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 4px;
+            backdrop-filter: blur(20px);
+            transition: border-color var(--transition), box-shadow var(--transition);
+        }
+
+        .search-box:focus-within {
+            border-color: var(--border-active);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .search-box input {
+            flex: 1;
+            background: none;
+            border: none;
+            outline: none;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            padding: 14px 18px;
+            min-width: 0;
+        }
+
+        .search-box input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: var(--gradient-primary);
+            border: none;
+            border-radius: var(--radius-md);
+            color: white;
+            font-family: inherit;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform var(--transition), box-shadow var(--transition);
+            white-space: nowrap;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .search-btn:active { transform: translateY(0); }
+
+        .search-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .search-btn svg {
+            width: 16px; height: 16px;
+        }
+
+        /* Quick query chips */
+        .quick-queries {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 14px;
+            justify-content: center;
+        }
+
+        .chip {
+            padding: 7px 14px;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all var(--transition);
+            backdrop-filter: blur(10px);
+        }
+
+        .chip:hover {
+            background: var(--bg-glass-hover);
+            color: var(--text-primary);
+            border-color: var(--border-active);
+        }
+
+        /* ================================================================
+           Response Card
+           ================================================================ */
+        .response-area {
+            flex: 1;
+            margin-top: 16px;
+        }
+
+        .response-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            backdrop-filter: blur(20px);
+            overflow: hidden;
+            animation: fadeUp 0.4s ease-out;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Response header with metadata */
+        .response-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-glass);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .response-meta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .badge-high { background: rgba(52, 211, 153, 0.15); color: var(--accent-emerald); }
+        .badge-medium { background: rgba(251, 191, 36, 0.15); color: var(--accent-amber); }
+        .badge-low { background: rgba(251, 113, 133, 0.15); color: var(--accent-rose); }
+        .badge-none { background: rgba(100, 116, 139, 0.15); color: var(--text-muted); }
+        .badge-type { background: rgba(129, 140, 248, 0.12); color: var(--accent-indigo); }
+        .badge-multi { background: rgba(34, 211, 238, 0.12); color: var(--accent-cyan); }
+        .badge-time { background: rgba(255, 255, 255, 0.05); color: var(--text-muted); font-weight: 400; }
+
+        /* Response body */
+        .response-body {
+            padding: 24px;
+            line-height: 1.75;
+            font-size: 0.92rem;
+            color: var(--text-primary);
+        }
+
+        .response-body h1, .response-body h2, .response-body h3 {
+            color: var(--text-primary);
+            margin: 20px 0 10px;
+            font-weight: 600;
+        }
+        .response-body h1 { font-size: 1.3rem; }
+        .response-body h2 { font-size: 1.15rem; }
+        .response-body h3 { font-size: 1rem; }
+        .response-body h1:first-child,
+        .response-body h2:first-child,
+        .response-body h3:first-child { margin-top: 0; }
+
+        .response-body p { margin-bottom: 12px; }
+
+        .response-body strong { color: var(--accent-indigo); font-weight: 600; }
+
+        .response-body ul, .response-body ol {
+            margin: 10px 0;
+            padding-left: 24px;
+        }
+        .response-body li { margin-bottom: 6px; }
+
+        .response-body code {
+            background: rgba(129, 140, 248, 0.1);
+            color: var(--accent-indigo);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.85em;
+        }
+
+        .response-body blockquote {
+            border-left: 3px solid var(--accent-indigo);
+            padding: 10px 16px;
+            margin: 14px 0;
+            background: rgba(129, 140, 248, 0.05);
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            color: var(--text-secondary);
+        }
+
+        .response-body hr {
+            border: none;
+            border-top: 1px solid var(--border-glass);
+            margin: 20px 0;
+        }
+
+        /* Source citations footer */
+        .sources-footer {
+            padding: 16px 20px;
+            border-top: 1px solid var(--border-glass);
+            background: rgba(255, 255, 255, 0.015);
+        }
+
+        .sources-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+
+        .sources-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .source-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-sm);
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            transition: all var(--transition);
+        }
+
+        .source-tag:hover {
+            background: var(--bg-glass-hover);
+            border-color: var(--border-active);
+        }
+
+        .source-tag .source-icon {
+            font-size: 0.9rem;
+        }
+
+        .source-tag .score {
+            color: var(--accent-emerald);
+            font-weight: 600;
+            font-size: 0.72rem;
+        }
+
+        /* Version warnings */
+        .warnings {
+            padding: 12px 20px;
+            border-top: 1px solid rgba(251, 191, 36, 0.15);
+            background: rgba(251, 191, 36, 0.03);
+        }
+
+        .warning-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-size: 0.82rem;
+            color: var(--accent-amber);
+            margin-bottom: 4px;
+        }
+
+        /* ================================================================
+           Loading State
+           ================================================================ */
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            gap: 16px;
+        }
+
+        .spinner {
+            width: 36px; height: 36px;
+            border: 3px solid var(--border-glass);
+            border-top-color: var(--accent-indigo);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .loading-text {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* ================================================================
+           Empty State
+           ================================================================ */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+        }
+
+        .empty-state .icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        .empty-state h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .empty-state p {
+            font-size: 0.88rem;
+            max-width: 400px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* ================================================================
+           Evaluation Modal
+           ================================================================ */
+        .eval-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-md);
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.82rem;
+            font-weight: 500;
+            cursor: pointer;
+            backdrop-filter: blur(20px);
+            transition: all var(--transition);
+            z-index: 10;
+        }
+
+        .eval-btn:hover {
+            background: var(--bg-glass-hover);
+            color: var(--text-primary);
+            border-color: var(--border-active);
+        }
+
+        /* ================================================================
+           Responsive
+           ================================================================ */
+        @media (max-width: 640px) {
+            .header h1 { font-size: 1.5rem; }
+            .search-btn span { display: none; }
+            .search-btn { padding: 12px 14px; }
+            .response-header { flex-direction: column; align-items: flex-start; }
+            .eval-btn { bottom: 16px; right: 16px; padding: 10px 14px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <!-- Header -->
+    <header class="header">
+        <div class="header-badge">
+            <span class="dot"></span>
+            RAG-Powered Support
+        </div>
+        <h1>CloudSync Support AI</h1>
+        <p>Instant answers from product docs & support history</p>
+    </header>
+
+    <!-- Search -->
+    <section class="search-container">
+        <div class="search-box" id="searchBox">
+            <input
+                type="text"
+                id="queryInput"
+                placeholder="Ask a support question — e.g. 'How do I share a folder?'"
+                autocomplete="off"
+                autofocus
+            >
+            <button class="search-btn" id="searchBtn" onclick="submitQuery()">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                </svg>
+                <span>Ask AI</span>
+            </button>
+        </div>
+        <div class="quick-queries">
+            <button class="chip" onclick="setQuery('How do I create a CloudSync account?')">Account setup</button>
+            <button class="chip" onclick="setQuery('My files aren\\'t syncing between devices')">Sync issues</button>
+            <button class="chip" onclick="setQuery('What are the differences between Free and Pro?')">Free vs Pro</button>
+            <button class="chip" onclick="setQuery('How secure is my data in CloudSync?')">Security</button>
+            <button class="chip" onclick="setQuery('The mobile app keeps crashing when I upload photos')">App crashes</button>
+            <button class="chip" onclick="setQuery('Can I use CloudSync API to integrate with my application?')">API help</button>
+        </div>
+    </section>
+
+    <!-- Response Area -->
+    <section class="response-area" id="responseArea">
+        <div class="response-card">
+            <div class="empty-state">
+                <div class="icon">🔍</div>
+                <h3>Ask a Customer Support Question</h3>
+                <p>
+                    This AI assistant searches through CloudSync product documentation 
+                    and historical support tickets to find the best answer for you.
+                </p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Evaluate Button -->
+<button class="eval-btn" onclick="runEvaluation()" id="evalBtn">
+    📊 Run Evaluation
+</button>
+
+<script>
+    // ================================================================
+    // App Logic
+    // ================================================================
+    const API_BASE = '';
+
+    const queryInput = document.getElementById('queryInput');
+    const searchBtn = document.getElementById('searchBtn');
+    const responseArea = document.getElementById('responseArea');
+
+    // Submit on Enter key
+    queryInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            submitQuery();
+        }
+    });
+
+    function setQuery(text) {
+        queryInput.value = text;
+        queryInput.focus();
+    }
+
+    async function submitQuery() {
+        const query = queryInput.value.trim();
+        if (!query) return;
+
+        // Show loading
+        searchBtn.disabled = true;
+        responseArea.innerHTML = `
+            <div class="response-card">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <div class="loading-text">Searching docs & generating answer...</div>
+                </div>
+            </div>`;
+
+        try {
+            const res = await fetch(`${API_BASE}/api/query`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ query }),
+            });
+
+            if (!res.ok) {
+                const err = await res.json();
+                throw new Error(err.detail || 'Request failed');
+            }
+
+            const data = await res.json();
+            renderResponse(data, query);
+        } catch (error) {
+            responseArea.innerHTML = `
+                <div class="response-card">
+                    <div class="empty-state">
+                        <div class="icon">⚠️</div>
+                        <h3>Something went wrong</h3>
+                        <p>${escapeHtml(error.message)}</p>
+                    </div>
+                </div>`;
+        } finally {
+            searchBtn.disabled = false;
+        }
+    }
+
+    function renderResponse(data, query) {
+        const confidenceClass = {
+            HIGH: 'badge-high', MEDIUM: 'badge-medium',
+            LOW: 'badge-low', NONE: 'badge-none'
+        }[data.confidence] || 'badge-none';
+
+        const confidenceLabel = {
+            HIGH: '✓ High Confidence', MEDIUM: '~ Medium Confidence',
+            LOW: '⚡ Low Confidence', NONE: '? No Match'
+        }[data.confidence] || 'Unknown';
+
+        // Build sources HTML
+        let sourcesHtml = '';
+        if (data.sources && data.sources.length > 0) {
+            const sourceTags = data.sources.map(s => {
+                const icon = s.type === 'product_doc' ? '📄' : '🎫';
+                const score = Math.round(s.relevance_score * 100);
+                return `<div class="source-tag">
+                    <span class="source-icon">${icon}</span>
+                    <span>${escapeHtml(s.title)}</span>
+                    <span class="score">${score}%</span>
+                </div>`;
+            }).join('');
+
+            sourcesHtml = `
+                <div class="sources-footer">
+                    <div class="sources-title">Sources (${data.source_count})</div>
+                    <div class="sources-list">${sourceTags}</div>
+                </div>`;
+        }
+
+        // Build warnings HTML
+        let warningsHtml = '';
+        if (data.version_warnings && data.version_warnings.length > 0) {
+            const items = data.version_warnings.map(w =>
+                `<div class="warning-item">⚠️ ${escapeHtml(w)}</div>`
+            ).join('');
+            warningsHtml = `<div class="warnings">${items}</div>`;
+        }
+
+        // Build header badges
+        let badges = `<span class="badge ${confidenceClass}">${confidenceLabel}</span>`;
+        badges += `<span class="badge badge-type">${formatQueryType(data.query_type)}</span>`;
+        if (data.is_multi_source) {
+            badges += `<span class="badge badge-multi">Multi-Source</span>`;
+        }
+        if (data.has_conflicts) {
+            badges += `<span class="badge badge-low">⚡ Conflicts</span>`;
+        }
+
+        const timeHtml = `<span class="badge badge-time">${data.processing_time_ms.toFixed(0)}ms</span>`;
+
+        responseArea.innerHTML = `
+            <div class="response-card">
+                <div class="response-header">
+                    <div class="response-meta">${badges}</div>
+                    ${timeHtml}
+                </div>
+                <div class="response-body">${markdownToHtml(data.answer)}</div>
+                ${warningsHtml}
+                ${sourcesHtml}
+            </div>`;
+    }
+
+    // ================================================================
+    // Evaluation
+    // ================================================================
+    async function runEvaluation() {
+        const btn = document.getElementById('evalBtn');
+        btn.textContent = '⏳ Evaluating...';
+        btn.disabled = true;
+
+        try {
+            const res = await fetch(`${API_BASE}/api/evaluate`, { method: 'POST' });
+            const data = await res.json();
+
+            const s = data.summary;
+            let resultsRows = data.results.map(r => {
+                if (r.error) return `<tr><td>${r.query_id}</td><td colspan="5">Error: ${r.error}</td></tr>`;
+                return `<tr>
+                    <td>${r.query_id}</td>
+                    <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(r.query)}</td>
+                    <td>${r.difficulty}</td>
+                    <td>${r.confidence}</td>
+                    <td>${(r.recall * 100).toFixed(0)}%</td>
+                    <td>${(r.keyword_coverage * 100).toFixed(0)}%</td>
+                </tr>`;
+            }).join('');
+
+            responseArea.innerHTML = `
+                <div class="response-card">
+                    <div class="response-header">
+                        <div class="response-meta">
+                            <span class="badge badge-type">📊 Evaluation Report</span>
+                            <span class="badge badge-multi">${s.total_queries} queries</span>
+                        </div>
+                    </div>
+                    <div class="response-body">
+                        <h2>Aggregate Metrics</h2>
+                        <table style="width:100%;border-collapse:collapse;margin:12px 0">
+                            <tr><td style="padding:6px 12px;border-bottom:1px solid var(--border-glass)">Retrieval Precision</td><td style="padding:6px 12px;border-bottom:1px solid var(--border-glass);font-weight:600">${(s.avg_retrieval_precision * 100).toFixed(1)}%</td></tr>
+                            <tr><td style="padding:6px 12px;border-bottom:1px solid var(--border-glass)">Retrieval Recall</td><td style="padding:6px 12px;border-bottom:1px solid var(--border-glass);font-weight:600">${(s.avg_retrieval_recall * 100).toFixed(1)}%</td></tr>
+                            <tr><td style="padding:6px 12px;border-bottom:1px solid var(--border-glass)">F1 Score</td><td style="padding:6px 12px;border-bottom:1px solid var(--border-glass);font-weight:600">${(s.f1_score * 100).toFixed(1)}%</td></tr>
+                            <tr><td style="padding:6px 12px;border-bottom:1px solid var(--border-glass)">Keyword Coverage</td><td style="padding:6px 12px;border-bottom:1px solid var(--border-glass);font-weight:600">${(s.avg_keyword_coverage * 100).toFixed(1)}%</td></tr>
+                        </table>
+                        <h2>Per-Query Results</h2>
+                        <div style="overflow-x:auto">
+                        <table style="width:100%;border-collapse:collapse;font-size:0.82rem">
+                            <thead><tr style="border-bottom:2px solid var(--border-glass)">
+                                <th style="padding:8px;text-align:left">ID</th>
+                                <th style="padding:8px;text-align:left">Query</th>
+                                <th style="padding:8px;text-align:left">Difficulty</th>
+                                <th style="padding:8px;text-align:left">Confidence</th>
+                                <th style="padding:8px;text-align:left">Recall</th>
+                                <th style="padding:8px;text-align:left">Keywords</th>
+                            </tr></thead>
+                            <tbody>${resultsRows}</tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>`;
+        } catch (e) {
+            responseArea.innerHTML = `
+                <div class="response-card">
+                    <div class="empty-state">
+                        <div class="icon">⚠️</div>
+                        <h3>Evaluation Failed</h3>
+                        <p>${escapeHtml(e.message)}</p>
+                    </div>
+                </div>`;
+        } finally {
+            btn.textContent = '📊 Run Evaluation';
+            btn.disabled = false;
+        }
+    }
+
+    // ================================================================
+    // Utilities
+    // ================================================================
+    function escapeHtml(str) {
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+    }
+
+    function formatQueryType(type) {
+        return type.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+    }
+
+    /**
+     * Minimal markdown-to-HTML converter.
+     * Handles: headings, bold, italic, code, lists, blockquotes, links, hr, paragraphs
+     */
+    function markdownToHtml(md) {
+        if (!md) return '';
+        let html = escapeHtml(md);
+
+        // Code blocks (```)
+        html = html.replace(/```(\w*)\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>');
+
+        // Headings
+        html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+        html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+        html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
+
+        // Bold & italic
+        html = html.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
+        html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+        html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+
+        // Inline code
+        html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+        // Blockquotes
+        html = html.replace(/^&gt; (.+)$/gm, '<blockquote>$1</blockquote>');
+
+        // Horizontal rule
+        html = html.replace(/^---$/gm, '<hr>');
+
+        // Unordered lists
+        html = html.replace(/^[-*] (.+)$/gm, '<li>$1</li>');
+        html = html.replace(/(<li>.*<\/li>\n?)+/g, '<ul>$&</ul>');
+
+        // Ordered lists
+        html = html.replace(/^\d+\.\s(.+)$/gm, '<li>$1</li>');
+
+        // Links
+        html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" style="color:var(--accent-cyan)">$1</a>');
+
+        // Source citations — highlight [Source: ...] patterns
+        html = html.replace(
+            /\[Source:\s*([^\]]+)\]/g,
+            '<span style="background:rgba(129,140,248,0.1);padding:2px 8px;border-radius:4px;font-size:0.8em;color:var(--accent-violet)">📌 Source: $1</span>'
+        );
+
+        // Paragraphs — wrap remaining loose text
+        html = html.replace(/\n\n/g, '</p><p>');
+        html = '<p>' + html + '</p>';
+
+        // Clean up empty paragraphs
+        html = html.replace(/<p>\s*<\/p>/g, '');
+        html = html.replace(/<p>(<h[1-3]>)/g, '$1');
+        html = html.replace(/(<\/h[1-3]>)<\/p>/g, '$1');
+        html = html.replace(/<p>(<ul>)/g, '$1');
+        html = html.replace(/(<\/ul>)<\/p>/g, '$1');
+        html = html.replace(/<p>(<blockquote>)/g, '$1');
+        html = html.replace(/(<\/blockquote>)<\/p>/g, '$1');
+        html = html.replace(/<p>(<hr>)<\/p>/g, '$1');
+        html = html.replace(/<p>(<pre>)/g, '$1');
+        html = html.replace(/(<\/pre>)<\/p>/g, '$1');
+
+        return html;
+    }
+</script>
+</body>
+</html>

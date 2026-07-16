@@ -1,0 +1,11 @@
+# RAG System Dependencies
+sentence-transformers==3.3.1
+chromadb==0.6.3
+scikit-learn==1.6.1
+fastapi==0.115.12
+uvicorn==0.34.2
+google-generativeai==0.8.5
+python-dotenv==1.1.0
+numpy==2.2.6
+pytest==8.4.0
+httpx==0.28.1

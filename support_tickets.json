@@ -1,0 +1,100 @@
+{
+  "support_tickets": [
+    {
+      "id": "ticket_001",
+      "title": "Cannot login after password reset",
+      "status": "resolved",
+      "category": "authentication",
+      "priority": "high",
+      "user_version": "v2.1",
+      "created_date": "2024-01-28",
+      "resolved_date": "2024-01-28",
+      "tags": ["login", "password", "browser"],
+      "content": "Customer Issue: User reported being unable to log in after performing a password reset. They confirmed receiving the password reset email and setting a new password, but login attempts continued to fail with 'Invalid credentials' error.\n\nTroubleshooting Steps: 1) Verified password reset was completed successfully in our system logs. 2) Asked customer to try incognito/private browsing mode - this worked. 3) Issue identified as browser cache storing old authentication tokens.\n\nResolution: Guided customer through clearing browser cache and cookies specifically for cloudsync.com. After clearing cache, customer was able to login successfully with new password. Also provided instructions for hard refresh (Ctrl+F5) as preventive measure for future issues.\n\nFollow-up: Sent email with link to browser troubleshooting guide. Customer confirmed stable access after 24 hours. Issue closed."
+    },
+    {
+      "id": "ticket_002",
+      "title": "Files not syncing between laptop and desktop",
+      "status": "resolved",
+      "category": "sync_issues",
+      "priority": "medium",
+      "user_version": "v2.1",
+      "created_date": "2024-01-26",
+      "resolved_date": "2024-01-27",
+      "tags": ["sync", "desktop", "startup"],
+      "content": "Customer Issue: User reported that files modified on their Windows desktop were not appearing on their MacBook laptop. Sync was working initially but stopped approximately one week ago.\n\nDiagnostic Process: 1) Confirmed both devices showed as 'Connected' in account dashboard. 2) Checked sync logs - desktop showed no sync activity for 6 days. 3) Asked customer to check system tray - CloudSync icon was missing. 4) Discovered CloudSync was not starting automatically on desktop boot.\n\nRoot Cause: Windows update had reset startup programs, disabling CloudSync from automatic startup. Customer was unaware application needed to be running for sync to work.\n\nResolution: 1) Re-enabled CloudSync in Windows startup programs (Task Manager > Startup tab). 2) Manually started CloudSync application. 3) Verified sync resumed and files appeared on laptop within 2 minutes. 4) Educated customer about system tray indicator and how to check sync status.\n\nPreventive Advice: Provided documentation link about ensuring CloudSync starts with system boot across different operating systems."
+    },
+    {
+      "id": "ticket_003",
+      "title": "Unexpected billing charge for Pro subscription",
+      "status": "resolved",
+      "category": "billing",
+      "priority": "high",
+      "user_version": "v2.1",
+      "created_date": "2024-01-25",
+      "resolved_date": "2024-01-25",
+      "tags": ["billing", "subscription", "refund"],
+      "content": "Customer Issue: Customer contacted us questioning a $9.99 charge on their credit card statement. They claimed they never upgraded to Pro and wanted an immediate refund.\n\nInvestigation: 1) Reviewed account history - customer had indeed upgraded to Pro plan on January 10th during their free trial period. 2) Found upgrade was initiated from customer's registered IP address during normal usage hours. 3) Confirmed welcome email for Pro upgrade was sent and delivered successfully.\n\nCustomer Response: When presented with evidence, customer recalled upgrading but forgot about it. However, they stated they weren't using Pro features and wanted to downgrade immediately.\n\nResolution: 1) Processed immediate downgrade to Free plan as requested. 2) Calculated prorated refund for unused portion of billing cycle (15 days remaining = $4.99 refund). 3) Processed refund to original payment method. 4) Confirmed customer's data usage was under 5GB limit for Free plan.\n\nAdditional Actions: Added calendar reminder feature request to product team - customers should be able to set billing reminders to avoid surprise charges."
+    },
+    {
+      "id": "ticket_004",
+      "title": "Extremely slow file synchronization",
+      "status": "resolved",
+      "category": "performance",
+      "priority": "medium",
+      "user_version": "v2.0",
+      "created_date": "2024-01-24",
+      "resolved_date": "2024-01-26",
+      "tags": ["performance", "bandwidth", "version"],
+      "content": "Customer Issue: User complained that file synchronization was taking hours for small files (documents under 1MB). Previously sync was nearly instantaneous, but performance degraded significantly over the past month.\n\nInitial Troubleshooting: 1) Verified customer's internet speed (50Mbps down/10Mbps up - adequate for CloudSync). 2) Checked server status - no known performance issues. 3) Reviewed sync logs showing bandwidth throttling was severely limiting transfers.\n\nDiagnosis: Customer was using CloudSync v2.0, which had aggressive default bandwidth throttling settings. The v2.0 defaults were set to 1Mbps to be conservative, but this proved too restrictive for most users.\n\nResolution: 1) Upgraded customer to v2.1 which has improved default bandwidth settings (10Mbps). 2) Guided customer through Settings > Network > Bandwidth configuration. 3) Explained how to adjust throttling based on their internet speed and usage patterns. 4) Tested with sample file - sync time improved from 10 minutes to under 30 seconds.\n\nVersion Comparison: Documented performance differences between v2.0 and v2.1 for future reference. Recommended all v2.0 users upgrade for better performance."
+    },
+    {
+      "id": "ticket_005",
+      "title": "Shared folder not visible after accepting invitation",
+      "status": "pending",
+      "category": "sharing",
+      "priority": "medium",
+      "user_version": "v2.1",
+      "created_date": "2024-01-29",
+      "resolved_date": null,
+      "tags": ["sharing", "ui", "investigation"],
+      "content": "Customer Issue: User reports they received a folder sharing invitation via email, clicked 'Accept', and received confirmation that they now have access to the shared folder. However, they cannot locate the folder in their CloudSync interface on any device.\n\nVerification Steps: 1) Confirmed invitation was sent by valid CloudSync user. 2) Email logs show invitation was delivered and acceptance link was clicked. 3) Backend shows shared folder is properly associated with customer's account. 4) Permissions are set correctly (Edit access).\n\nTroubleshooting Attempted: 1) Customer tried refreshing application and restarting CloudSync. 2) Checked both main folder list and 'Shared with Me' section - folder not visible in either location. 3) Web interface also doesn't show the shared folder. 4) Other shared folders are visible normally.\n\nCurrent Status: Issue escalated to development team. Suspected UI bug where newly accepted shares don't appear immediately. Engineering is investigating database sync between sharing service and client applications.\n\nTemporary Workaround: Suggested folder owner re-send invitation, but customer prefers to wait for proper fix.\n\nNext Steps: Development team will deploy fix in next patch release (estimated within 2 weeks). Customer will be notified when resolution is available."
+    },
+    {
+      "id": "ticket_006",
+      "title": "Mobile app crashing when uploading large photos",
+      "status": "resolved",
+      "category": "mobile",
+      "priority": "high",
+      "user_version": "v2.0",
+      "created_date": "2024-01-23",
+      "resolved_date": "2024-01-24",
+      "tags": ["mobile", "crash", "photos", "memory"],
+      "content": "Customer Issue: iOS app crashes consistently when trying to upload photos larger than 10MB from iPhone camera. App closes immediately after selecting photo for upload, with no error message.\n\nDevice Information: iPhone 12 Pro, iOS 17.2, CloudSync app v2.0.3, 64GB storage with 15GB available.\n\nReproduction: 1) Confirmed issue occurs with high-resolution photos (12MP+). 2) Smaller photos (under 5MB) upload successfully. 3) Crash happens specifically during photo processing phase, not during upload itself.\n\nRoot Cause Analysis: iOS CloudSync v2.0 has memory management issue when processing high-resolution images. App attempts to load full-resolution image into memory for compression, causing memory overflow on devices with limited RAM.\n\nResolution: 1) Provided immediate workaround - use 'Optimize iPhone Storage' setting to reduce photo file sizes. 2) Escalated to mobile development team for permanent fix. 3) Fix deployed in v2.0.4 (released 24 hours later) with improved image processing pipeline.\n\nTechnical Fix: Updated app to process images in chunks and implement progressive loading, reducing memory footprint by 70% for large image uploads.\n\nCustomer Follow-up: Customer confirmed v2.0.4 resolved the issue completely. Large photos now upload successfully without crashes."
+    },
+    {
+      "id": "ticket_007",
+      "title": "Two-factor authentication setup problems",
+      "status": "resolved",
+      "category": "security",
+      "priority": "medium",
+      "user_version": "v2.1",
+      "created_date": "2024-01-27",
+      "resolved_date": "2024-01-27",
+      "tags": ["2fa", "security", "authentication"],
+      "content": "Customer Issue: User wanted to enable two-factor authentication (2FA) for enhanced security but was unable to complete the setup process. QR code would not scan properly with Google Authenticator app.\n\nTroubleshooting Process: 1) Verified customer was using latest version of Google Authenticator. 2) Tested QR code generation on our end - codes were generating correctly. 3) Asked customer to try manual entry method instead of QR scan.\n\nManual Setup Success: Customer was able to add CloudSync to authenticator using manual entry of the secret key. Issue was with QR code display size on customer's high-DPI monitor making it difficult for phone camera to scan.\n\nResolution: 1) Completed 2FA setup using manual method. 2) Provided backup codes for account recovery. 3) Tested 2FA login process to ensure everything worked correctly. 4) Documented QR code display issue for UI team to address.\n\nSecurity Education: Took opportunity to educate customer about 2FA best practices, backup code storage, and account recovery procedures.\n\nUI Improvement: Submitted feature request for adjustable QR code size and automatic fallback to manual entry if scanning fails."
+    },
+    {
+      "id": "ticket_008",
+      "title": "API rate limiting causing integration failures",
+      "status": "resolved",
+      "category": "api",
+      "priority": "high",
+      "user_version": "v2.1",
+      "created_date": "2024-01-30",
+      "resolved_date": "2024-01-31",
+      "tags": ["api", "rate-limiting", "integration"],
+      "content": "Customer Issue: Developer customer reported their application integration was failing with HTTP 429 (Too Many Requests) errors. Their backup application was attempting to sync 500+ files daily and hitting rate limits.\n\nAccount Analysis: Customer was on Pro plan with standard rate limits (10,000 requests/hour). Their application was making inefficient API calls - individual requests for each file instead of using batch operations.\n\nImmediate Solution: 1) Provided temporary rate limit increase to prevent immediate service disruption. 2) Analyzed their API usage patterns and identified optimization opportunities. 3) Suggested using batch upload endpoints and webhook notifications instead of polling.\n\nCode Review: Customer shared their integration code. Issues identified: 1) No exponential backoff for retry logic. 2) Uploading files one-by-one instead of using batch operations. 3) Polling for changes every 5 minutes instead of using webhooks.\n\nOptimization Guidance: 1) Provided code examples for batch operations. 2) Explained webhook setup for real-time notifications. 3) Shared best practices documentation for API integration. 4) Recommended caching strategies to reduce API calls.\n\nOutcome: Customer implemented suggested optimizations, reducing API calls by 80% while improving application performance. Rate limits returned to standard levels without any service disruption.\n\nDocumentation Update: Added this case study to API best practices guide to help other developers avoid similar issues."
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "product_docs": [
+    {
+      "id": "doc_001",
+      "title": "Getting Started with CloudSync",
+      "type": "user_guide",
+      "version": "v2.1",
+      "last_updated": "2024-01-15",
+      "tags": ["setup", "onboarding", "basics"],
+      "content": "CloudSync is a comprehensive file synchronization service that keeps your documents, photos, and files updated across all your devices in real-time. Getting started is simple:\n\n1. Create your account: Visit cloudsync.com/signup and register with your email address. You'll receive a confirmation email within minutes.\n\n2. Choose your plan: Free accounts include 5GB of storage, while Pro accounts ($9.99/month) offer unlimited storage, advanced sharing features, and priority support.\n\n3. Download applications: CloudSync works on Windows, macOS, Linux, iOS, and Android. Download the appropriate version from our downloads page.\n\n4. Initial setup: Launch the desktop application and sign in with your credentials. The setup wizard will guide you through selecting your sync folder location.\n\n5. Add folders to sync: Click the '+' button in the main interface to select folders you want to keep synchronized. You can add up to 10 folders on the free plan, unlimited on Pro.\n\n6. Verify synchronization: Create a test file on one device and confirm it appears on your other devices within 30 seconds.\n\nImportant notes: Ensure you have sufficient local storage space for synced files. The initial sync may take several hours depending on the amount of data being synchronized."
+    },
+    {
+      "id": "doc_002",
+      "title": "Troubleshooting Sync Issues",
+      "type": "troubleshooting",
+      "version": "v2.1",
+      "last_updated": "2024-01-20",
+      "tags": ["sync", "problems", "troubleshooting"],
+      "content": "When files aren't synchronizing properly, follow this systematic troubleshooting approach:\n\n**Basic Checks:**\n1. Internet connectivity: Ensure you have a stable internet connection. CloudSync requires consistent connectivity for real-time sync.\n\n2. Application status: Check that CloudSync is running by looking for the cloud icon in your system tray (Windows) or menu bar (macOS).\n\n3. Storage space: Verify sufficient storage on both local device and CloudSync account. Free accounts are limited to 5GB total.\n\n4. File conflicts: Look for files with conflict indicators (usually marked with device names). Resolve conflicts by choosing the correct version.\n\n**Advanced Troubleshooting:**\n5. Pause and resume: In Settings menu, click 'Pause Sync' wait 10 seconds, then click 'Resume Sync'.\n\n6. Restart application: Completely close CloudSync (right-click system tray icon > Exit) and restart it.\n\n7. Clear local cache: Go to Settings > Advanced > Clear Local Cache. This will re-download all synced files.\n\n8. Check sync logs: Navigate to Settings > Advanced > View Logs to identify specific error messages.\n\n9. Firewall/antivirus: Ensure CloudSync is allowed through your firewall and antivirus software.\n\n**When to Contact Support:**\nIf sync issues persist after trying all steps above, contact support with your log files and a description of the problem. Include your operating system, CloudSync version, and approximate number of files being synced."
+    },
+    {
+      "id": "doc_003",
+      "title": "Account Management and Billing",
+      "type": "account_guide",
+      "version": "v2.1",
+      "last_updated": "2024-01-10",
+      "tags": ["billing", "account", "subscription"],
+      "content": "Complete guide to managing your CloudSync account and billing:\n\n**Account Settings:**\nAccess account settings by clicking your profile picture > Account Settings. Here you can:\n- Update personal information (name, email, phone)\n- Change password (requires current password confirmation)\n- Enable two-factor authentication for enhanced security\n- Set notification preferences\n- View account activity and login history\n\n**Subscription Management:**\nTo upgrade from Free to Pro ($9.99/month or $99/year):\n1. Go to Account Settings > Billing\n2. Select your preferred plan (monthly or annual billing)\n3. Enter payment information (credit card or PayPal accepted)\n4. Confirm upgrade - changes take effect immediately\n\n**Billing Information:**\n- All charges appear as 'CLOUDSYNC SERVICES' on statements\n- Billing occurs on the same date each month/year as your upgrade\n- Invoices are emailed automatically and stored in Account Settings > Billing History\n- Update payment methods anytime in Billing > Payment Methods\n\n**Cancellation Process:**\nTo cancel your Pro subscription:\n1. Go to Account Settings > Billing > Manage Subscription\n2. Click 'Cancel Subscription' and confirm\n3. Your account remains Pro until the end of the current billing period\n4. After expiration, account automatically downgrades to Free (data beyond 5GB limit will be read-only)\n\n**Refund Policy:**\nRefunds available within 30 days of purchase for annual plans, 7 days for monthly plans. Contact billing@cloudsync.com with your account email and reason for refund request."
+    },
+    {
+      "id": "doc_004",
+      "title": "Advanced Features and Settings",
+      "type": "advanced_guide",
+      "version": "v2.1",
+      "last_updated": "2024-01-25",
+      "tags": ["advanced", "features", "settings"],
+      "content": "Maximize CloudSync's potential with these advanced features:\n\n**File Versioning:**\nCloudSync automatically maintains version history for all synced files:\n- Free accounts: 7 days of version history\n- Pro accounts: 30 days of version history\n- Access versions by right-clicking any file > 'Version History'\n- Restore previous versions with a single click\n- Version history counts toward storage quota\n\n**Selective Sync:**\nSave local storage by choosing which folders sync to each device:\n1. Open Settings > Selective Sync\n2. Uncheck folders you don't want on this device\n3. Files remain in cloud and accessible via web interface\n4. Re-enable anytime to download locally\n\n**Sharing and Collaboration:**\n- Folder sharing: Right-click any folder > 'Share' > Enter email addresses\n- Permission levels: View-only, Edit, or Admin access\n- Link sharing (Pro only): Generate public links with expiration dates and password protection\n- Shared folders appear in separate 'Shared with Me' section\n\n**Network and Performance:**\nOptimize sync performance in Settings > Network:\n- Bandwidth throttling: Limit upload/download speeds to preserve network for other applications\n- Sync schedule: Set active hours for synchronization\n- LAN sync: Faster sync between devices on same network\n- Cellular data: Enable/disable mobile data usage on mobile devices\n\n**Security Features:**\n- End-to-end encryption for all files in transit and at rest\n- Remote wipe: Remove CloudSync data from lost/stolen devices\n- Admin controls for business accounts\n- Activity monitoring and suspicious login alerts"
+    },
+    {
+      "id": "doc_005",
+      "title": "Mobile App Features and Limitations",
+      "type": "mobile_guide",
+      "version": "v2.0",
+      "last_updated": "2023-12-01",
+      "tags": ["mobile", "ios", "android"],
+      "content": "CloudSync mobile apps provide essential access to your files on-the-go:\n\n**Installation and Setup:**\n1. Download from Apple App Store (iOS 13+ required) or Google Play Store (Android 8+ required)\n2. Launch app and tap 'Sign In with Existing Account'\n3. Enter your CloudSync email and password\n4. Grant necessary permissions for file access and notifications\n5. Enable biometric login (Face ID, Touch ID, or fingerprint) for quick access\n\n**Mobile App Features:**\n- View all synced files and folders\n- Basic text editing for documents\n- Photo and video viewing with zoom and slideshow\n- Upload photos directly from camera or gallery\n- Share files via email, messaging, or other apps\n- Offline access to recently viewed files (Pro feature)\n- Automatic photo backup (can be enabled in settings)\n\n**Current Limitations (v2.0):**\n- No advanced document editing (use desktop version for complex edits)\n- Cannot create new folders within the app\n- Limited file format support for editing\n- No access to version history\n- Cannot manage sharing permissions\n\n**Upcoming in v2.2 (Expected March 2024):**\n- Full document editing capabilities\n- Folder creation and management\n- Version history access\n- Enhanced offline mode with selective file caching\n- Improved sharing controls\n\n**Data Usage:**\nMobile apps can consume significant cellular data. Manage usage in app Settings:\n- Enable 'Wi-Fi Only' for large file operations\n- Set photo backup to Wi-Fi only\n- Monitor data usage in Settings > Data Usage"
+    },
+    {
+      "id": "doc_006",
+      "title": "Security and Privacy Guide",
+      "type": "security_guide",
+      "version": "v2.1",
+      "last_updated": "2024-01-30",
+      "tags": ["security", "privacy", "encryption"],
+      "content": "CloudSync takes your data security and privacy seriously:\n\n**Encryption Standards:**\n- All files encrypted with AES-256 encryption during transfer and storage\n- Zero-knowledge architecture: CloudSync cannot access your unencrypted files\n- Unique encryption keys generated for each user account\n- End-to-end encryption for shared files and folders\n\n**Account Security:**\n- Strong password requirements (minimum 12 characters, mixed case, numbers, symbols)\n- Two-factor authentication (2FA) available via SMS, email, or authenticator apps\n- Session management: View and terminate active sessions from other devices\n- Login attempt monitoring with automatic account lockout after 5 failed attempts\n- Email notifications for all security-related events\n\n**Privacy Controls:**\n- Data residency options: Choose where your data is stored (US, EU, or Asia-Pacific)\n- No data mining or content scanning for advertising purposes\n- Minimal metadata collection (file sizes, modification dates only)\n- Complete data export available anytime\n- Account deletion removes all data within 30 days\n\n**Business Security Features (Pro accounts):**\n- Admin dashboard for user management\n- Detailed audit logs for file access and sharing\n- Advanced sharing controls and permissions\n- Integration with enterprise SSO systems\n- Compliance certifications (SOC 2, ISO 27001, GDPR)\n\n**Best Practices:**\n1. Enable two-factor authentication immediately after account creation\n2. Use unique, strong passwords and consider a password manager\n3. Regularly review shared files and folders\n4. Monitor account activity in Settings > Security > Recent Activity\n5. Keep CloudSync applications updated to latest versions\n6. Be cautious when accessing CloudSync on public computers or networks"
+    },
+    {
+      "id": "doc_007",
+      "title": "API and Developer Integration",
+      "type": "developer_guide",
+      "version": "v2.1",
+      "last_updated": "2024-02-01",
+      "tags": ["api", "developers", "integration"],
+      "content": "CloudSync offers comprehensive APIs for developers and system integrators:\n\n**REST API Overview:**\n- Base URL: https://api.cloudsync.com/v2/\n- Authentication: OAuth 2.0 or API key-based\n- Rate limits: 1000 requests/hour for free accounts, 10000/hour for Pro\n- Response format: JSON with consistent error codes\n- Full documentation available at docs.cloudsync.com/api\n\n**Available Endpoints:**\n- File operations: Upload, download, delete, move, copy files\n- Folder management: Create, list, share folders\n- User management: Profile information, storage usage\n- Sharing: Create and manage shared links and folder permissions\n- Webhooks: Real-time notifications for file changes\n\n**SDK Availability:**\n- Official SDKs for Python, JavaScript (Node.js), Java, and C#\n- Community SDKs for PHP, Ruby, and Go\n- Mobile SDKs for iOS (Swift) and Android (Kotlin/Java)\n\n**Common Integration Scenarios:**\n- Backup solutions: Automated file backup from applications\n- Content management: Integration with CMS platforms\n- Workflow automation: File processing pipelines\n- Mobile app integration: Add cloud storage to mobile applications\n\n**Webhook Events:**\nReceive real-time notifications for:\n- File uploads, modifications, deletions\n- Folder creation and sharing changes\n- User account changes\n- Quota and billing events\n\n**Getting Started:**\n1. Create developer account at developers.cloudsync.com\n2. Generate API credentials for your application\n3. Review API documentation and code examples\n4. Test in sandbox environment before production deployment\n5. Submit for API review if requesting higher rate limits\n\n**Best Practices:**\n- Implement proper error handling and retry logic\n- Use batch operations for multiple file operations\n- Cache API responses when appropriate\n- Implement webhook verification for security\n- Follow rate limiting guidelines to avoid throttling"
+    }
+  ]
+}

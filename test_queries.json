@@ -1,0 +1,223 @@
+{
+  "test_queries": [
+    {
+      "id": "query_001",
+      "query": "How do I create a CloudSync account?",
+      "difficulty": "easy",
+      "expected_sources": [
+        "doc_001"
+      ],
+      "expected_answer_contains": [
+        "cloudsync.com/signup",
+        "email address",
+        "confirmation email"
+      ],
+      "query_type": "factual",
+      "evaluation_metrics": {
+        "response_quality": {
+          "accuracy": "Does the response contain correct information from the source documents?",
+          "completeness": "Does the response address all aspects of the question?",
+          "relevance": "Is the information provided directly relevant to the query?",
+          "clarity": "Is the response well-structured and easy to understand?"
+        },
+        "retrieval_quality": {
+          "precision": "Are the retrieved documents relevant to the query?",
+          "recall": "Were all relevant documents retrieved?",
+          "ranking": "Are the most relevant documents ranked highest?",
+          "diversity": "Does retrieval include different types of relevant information?"
+        },
+        "citation_quality": {
+          "accuracy": "Are citations correctly attributed to source documents?",
+          "specificity": "Do citations include specific sections or page references?",
+          "completeness": "Are all information sources properly cited?",
+          "format": "Are citations formatted consistently and clearly?"
+        },
+        "edge_case_handling": {
+          "unknown_queries": "Does system appropriately say 'I don't know' for unsupported queries?",
+          "ambiguous_queries": "How well does system handle queries that could have multiple interpretations?",
+          "conflicting_information": "How does system handle contradictory information from different sources?",
+          "version_awareness": "Does system account for version differences in documentation?"
+        }
+      }notes": "Should provide step-by-step signup process from getting started guide"
+    },
+    {
+      "id": "query_002",
+      "query": "My files aren't syncing between devices, what should I do?",
+      "difficulty": "medium",
+      "expected_sources": [
+        "doc_002",
+        "ticket_002"
+      ],
+      "expected_answer_contains": [
+        "internet connection",
+        "system tray",
+        "restart application"
+      ],
+      "query_type": "troubleshooting",
+      "evaluation_notes": "Should combine troubleshooting guide with real ticket resolution"
+    },
+    {
+      "id": "query_003",
+      "query": "I was charged for Pro but don't remember upgrading",
+      "difficulty": "medium",
+      "expected_sources": [
+        "doc_003",
+        "ticket_003"
+      ],
+      "expected_answer_contains": [
+        "billing history",
+        "account settings",
+        "refund policy"
+      ],
+      "query_type": "billing_issue",
+      "evaluation_notes": "Should address both billing management and specific scenario from ticket"
+    },
+    {
+      "id": "query_004",
+      "query": "How can I access previous versions of my files?",
+      "difficulty": "easy",
+      "expected_sources": [
+        "doc_004"
+      ],
+      "expected_answer_contains": [
+        "version history",
+        "right-click",
+        "30 days",
+        "Pro accounts"
+      ],
+      "query_type": "feature_usage",
+      "evaluation_notes": "Should explain file versioning feature with account type differences"
+    },
+    {
+      "id": "query_005",
+      "query": "CloudSync is running very slowly, how do I fix this?",
+      "difficulty": "hard",
+      "expected_sources": [
+        "doc_004",
+        "ticket_004"
+      ],
+      "expected_answer_contains": [
+        "bandwidth throttling",
+        "settings",
+        "network",
+        "version"
+      ],
+      "query_type": "performance",
+      "evaluation_notes": "Should combine network settings info with version-specific performance issues"
+    },
+    {
+      "id": "query_006",
+      "query": "What are the differences between Free and Pro accounts?",
+      "difficulty": "easy",
+      "expected_sources": [
+        "doc_001",
+        "doc_003",
+        "doc_004"
+      ],
+      "expected_answer_contains": [
+        "5GB",
+        "unlimited storage",
+        "$9.99",
+        "version history"
+      ],
+      "query_type": "comparison",
+      "evaluation_notes": "Should aggregate information from multiple documents about plan differences"
+    },
+    {
+      "id": "query_007",
+      "query": "How do I share folders with other people?",
+      "difficulty": "medium",
+      "expected_sources": [
+        "doc_004"
+      ],
+      "expected_answer_contains": [
+        "right-click",
+        "share",
+        "email addresses",
+        "permission levels"
+      ],
+      "query_type": "feature_usage",
+      "evaluation_notes": "Should explain folder sharing process and permission options"
+    },
+    {
+      "id": "query_008",
+      "query": "The mobile app keeps crashing when I upload photos",
+      "difficulty": "hard",
+      "expected_sources": [
+        "doc_005",
+        "ticket_006"
+      ],
+      "expected_answer_contains": [
+        "large photos",
+        "memory",
+        "app version",
+        "update"
+      ],
+      "query_type": "technical_issue",
+      "evaluation_notes": "Should identify version-specific mobile issue and resolution"
+    },
+    {
+      "id": "query_009",
+      "query": "Can I use CloudSync API to integrate with my application?",
+      "difficulty": "medium",
+      "expected_sources": [
+        "doc_007"
+      ],
+      "expected_answer_contains": [
+        "REST API",
+        "OAuth",
+        "rate limits",
+        "SDK"
+      ],
+      "query_type": "developer",
+      "evaluation_notes": "Should provide API overview and integration guidance"
+    },
+    {
+      "id": "query_010",
+      "query": "I accepted a shared folder invitation but can't see the folder",
+      "difficulty": "hard",
+      "expected_sources": [
+        "ticket_005"
+      ],
+      "expected_answer_contains": [
+        "known issue",
+        "development team",
+        "UI bug"
+      ],
+      "query_type": "known_issue",
+      "evaluation_notes": "Should identify this as a pending issue from support tickets"
+    },
+    {
+      "id": "query_011",
+      "query": "How secure is my data in CloudSync?",
+      "difficulty": "medium",
+      "expected_sources": [
+        "doc_006"
+      ],
+      "expected_answer_contains": [
+        "AES-256",
+        "encryption",
+        "zero-knowledge",
+        "two-factor"
+      ],
+      "query_type": "security",
+      "evaluation_notes": "Should provide comprehensive security information"
+    },
+    {
+      "id": "query_012",
+      "query": "What happens if I cancel my Pro subscription?",
+      "difficulty": "easy",
+      "expected_sources": [
+        "doc_003"
+      ],
+      "expected_answer_contains": [
+        "end of billing period",
+        "downgrade",
+        "5GB limit",
+        "read-only"
+      ],
+      "query_type": "cancellation",
+      "evaluation_notes": "Should explain cancellation process and consequences"
+    }
+  ],
+  "evaluation_
